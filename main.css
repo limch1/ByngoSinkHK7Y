@@ -1,0 +1,60 @@
+body {
+    display:grid;
+}
+
+.rounded {
+    border-radius: 0.25em;
+}
+
+.bordered {
+    border: 0.15em solid black;
+}
+
+header {
+    box-sizing: border-box;
+    justify-self: center;
+    padding:1em;
+    display: flex;
+    background-color: brown;
+}
+
+main {
+    padding-top: 1em;
+    display: flex;
+    gap:1em;
+}
+
+footer {
+    box-sizing: border-box;
+    background-color: grey;
+    justify-self: center;
+    display: flex;
+    justify-content: right;
+    margin-top: 1em;
+    padding: 1em;
+}
+
+#container {
+    padding-top: 1.5rem;
+    width: 98vw;
+    max-width: 80em;
+    justify-self: center;
+}
+
+#room-creation {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1em;
+    width: 20em;
+    background-color: burlywood;
+    padding:1em;
+}
+
+#room-list {
+    background-color: chocolate;
+    padding:1em;
+    border-color: black;
+    width:100%;
+    min-width: 10em;
+}
