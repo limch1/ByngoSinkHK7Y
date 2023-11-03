@@ -8,7 +8,7 @@ websocket.addEventListener("open", () => {
 });
 
 // Response listeners
-window.addEventListener("games", (data) => {
+window.addEventListener("GAMES", (data) => {
     // Get games (on load)
     const event = data.detail;
     let games = event.games;
@@ -19,7 +19,7 @@ window.addEventListener("games", (data) => {
     GET_GENERATORS(gameSelect.value);
 });
 
-window.addEventListener("generators", (data) => {
+window.addEventListener("GENERATORS", (data) => {
     // Get a game's generators (every time game updates)
     const event = data.detail;
     let gens = event.generators;
@@ -34,11 +34,11 @@ window.addEventListener("generators", (data) => {
 });
 
 
-window.addEventListener("listed", (data) => {
+window.addEventListener("LISTED", (data) => {
     const event = data.detail;
 });
 
-window.addEventListener("opened", (data) => {
+window.addEventListener("OPENED", (data) => {
     const event = data.detail;
     Cookies.set(event.roomId, event.userId, {sameSite: "strict"});
     window.location.href = "board.html?id=" + event.roomId;

@@ -40,6 +40,10 @@ body {
     width:100%;
 }
 
+.creation-width {
+    width: 60%;
+}
+
 label {
     white-space: nowrap;
     vertical-align: middle;
@@ -51,6 +55,7 @@ header {
     padding:1em;
     display: flex;
     background-color: #2e3338;
+    vertical-align: middle;
 }
 
 main {
@@ -70,10 +75,40 @@ footer {
     font-weight: 100;
 }
 
+@media screen and (max-width: 800px) {
+    main {
+        flex-direction: column-reverse;
+        flex-wrap: wrap;
+        justify-content:flex-end;
+    }
+
+    #room-creation-outer {
+        width: 100% !important;
+        max-width: 30em;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #room-list-outer {
+        height: auto;
+    }
+
+    footer {
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    #container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
 #container {
     padding-top: 1.5rem;
     width: 98vw;
-    min-width: 40em;
+    min-width: 20em;
     max-width: 80em;
     justify-self: center;
     display:flex;

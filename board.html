@@ -17,12 +17,22 @@
         <header class="rounded bordered">
             <h1>BingoSink: a replacement for BingoSync</h1>
         </header>
-        <main>
+        <main id="room">
             <div id="board">
                 here be the board
             </div>
             <div id="players">
                 here be the players
+            </div>
+            <button id="Exit" onclick="exit()">Exit Room</button>
+        </main>
+        <main id="login-main" hidden>
+            <div id="login-container">
+                <div class="flex fill">
+                    <label>Username:</label>
+                    <input type="text" id="username" class="fill rounded" value="TestName">
+                    <button id="login" onclick="login()">Login</button>
+                </div>
             </div>
         </main>
         <footer>

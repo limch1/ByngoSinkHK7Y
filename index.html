@@ -15,7 +15,10 @@
 <body>
     <div id="container" class="container-fluid">
         <header class="rounded bordered">
-            <h1>BingoSink: a replacement for BingoSync</h1>
+            <div class="flex" style="row-gap: 0;">
+                <h1>ByngoSink</h1>
+                <p style="margin:0; height: 2em;">a replacement for BingoSync</p>
+            </div>
         </header>
         <main>
             <div id="room-list-outer" class="rounded bordered">
@@ -30,25 +33,25 @@
                 <div id="room-creation-inner" class="flex-vertical">
                     <div class="flex fill">
                         <label>Room Name:</label>
-                        <input type="text" id="roomName" class="fill rounded" value="Test">
+                        <input type="text" id="roomName" class="creation-width rounded" value="Test">
                     </div>
                     <div class="flex fill">
                         <label>Username:</label>
-                        <input type="text" id="username" class="fill rounded" value="TestName">
+                        <input type="text" id="username" class="creation-width rounded" value="TestName">
                     </div>
                     <div class="flex fill">
                         <label>Game:</label>
-                        <select id="game" class="fill rounded" name="Game" >
+                        <select id="game" class="creation-width rounded" name="Game" >
                         </select>
                     </div>
                     <div class="flex fill">
                         <label>Generator:</label>
-                        <select id="generator" class="fill rounded" name="Generator">
+                        <select id="generator" class="creation-width rounded" name="Generator">
                         </select>
                     </div>
                     <div class="flex fill">
                         <label>Board Type:</label>
-                        <select id="board" class="fill rounded" name="Board">
+                        <select id="board" class="creation-width rounded" name="Board">
                             <option value="Non-Lockout">Non-Lockout</option>
                             <option value="Lockout">Lockout</option>
                             <option value="Exploration">Exploration</option>
