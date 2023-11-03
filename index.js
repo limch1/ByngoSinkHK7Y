@@ -1,3 +1,5 @@
+var gens = undefined;
+
 websocket.addEventListener("open", () => {
     GAMES();
     LIST();
@@ -6,6 +8,15 @@ websocket.addEventListener("open", () => {
         GET_GENERATORS(gameDropdown.value);
     });
 });
+
+function setLargeBoards() {
+    let genDropdown = document.getElementById("generator");
+    console.log(genDropdown.options[genDropdown.selectedIndex]);
+    let bool = genDropdown.options[genDropdown.selectedIndex].classList.contains("small");
+    for (const opt of document.getElementById("board").getElementsByClassName("large")) {
+        opt.disabled = bool;
+    }
+}
 
 // Response listeners
 window.addEventListener("GAMES", (data) => {
@@ -22,15 +33,20 @@ window.addEventListener("GAMES", (data) => {
 window.addEventListener("GENERATORS", (data) => {
     // Get a game's generators (every time game updates)
     const event = data.detail;
-    let gens = event.generators;
+    gens = event.generators;
     const genSelect = document.getElementById("generator");
     let opts = genSelect.options;
     for (const element of opts) {
-        genSelect.remove(element.value)
+        genSelect.remove(element.value);
     }
     for (const gen of gens) {
-        genSelect.add(new Option(gen, gen))
+        let opt = new Option(gen.name, gen.name);
+        if (gen.small) { opt.classList.add("small"); }
+        genSelect.add(opt);
     }
+    if (gens.length == 1) { genSelect.disabled = true; } 
+    else { genSelect.disabled = false; }
+    setLargeBoards();
 });
 
 
