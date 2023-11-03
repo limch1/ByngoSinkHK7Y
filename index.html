@@ -15,48 +15,58 @@
 <body>
     <div id="container" class="container-fluid">
         <header class="rounded bordered">
-            BingoSink: a replacement for BingoSync
+            <h1>BingoSink: a replacement for BingoSync</h1>
         </header>
         <main>
-            <div id="room-list" class="rounded bordered">
-                This is where the room list will go
+            <div id="room-list-outer" class="rounded bordered">
+                <div class="window-header">Room List</div>
+                <div id="room-list-inner">
+                    <p>This is where the room list will go</p>
+                </div>
             </div>
     
-            <div id="room-creation" class="rounded bordered">
-                <label>Room Name:</label>
-                <input type="text" id="roomName" value="Test"><br>
-        
-        
-                <label>Username:</label>
-                <input type="text" id="username" value="TestName"><br>
-        
-                <label>Game:</label>
-                <select id="game" name="Game">
-                    <option value="0">Hollow Knight</option>
-                </select><br>
-        
-                <label>Generator:</label>
-                <select id="generator" name="Generator">
-                </select><br>
-        
-                <label>Board Type:</label>
-                <select id="board" name="Board">
-                    <option value="0">Non-Lockout</option>
-                    <option value="1">Lockout</option>
-                    <option value="2">Exploration</option>
-                    <option value="3">Roguelike</option>
-                    <option value="4">Get To The Other Side</option>
-                </select><br>
-                <!--
-                <label>Width:</label>
-                <input type="text" id="width" value="5">
-                <label>Height:</label>
-                <input type="text" id="height" value="5"><br>
-                -->
-                <button id="create_room" onclick="create_room()">Create Room</button><br>
+            <div id="room-creation-outer" class="rounded bordered">
+                <div class="window-header">New Room</div>
+                <div id="room-creation-inner" class="flex-vertical">
+                    <div class="flex fill">
+                        <label>Room Name:</label>
+                        <input type="text" id="roomName" class="fill rounded" value="Test">
+                    </div>
+                    <div class="flex fill">
+                        <label>Username:</label>
+                        <input type="text" id="username" class="fill rounded" value="TestName">
+                    </div>
+                    <div class="flex fill">
+                        <label>Game:</label>
+                        <select id="game" class="fill rounded" name="Game" >
+                        </select>
+                    </div>
+                    <div class="flex fill">
+                        <label>Generator:</label>
+                        <select id="generator" class="fill rounded" name="Generator">
+                        </select>
+                    </div>
+                    <div class="flex fill">
+                        <label>Board Type:</label>
+                        <select id="board" class="fill rounded" name="Board">
+                            <option value="Non-Lockout">Non-Lockout</option>
+                            <option value="Lockout">Lockout</option>
+                            <option value="Exploration">Exploration</option>
+                            <option value="Roguelike">Roguelike</option>
+                            <option value="GTTOS">Get To The Other Side</option>
+                        </select>
+                    </div>
+                    <!--
+                    <label>Width:</label>
+                    <input type="text" id="width" value="5">
+                    <label>Height:</label>
+                    <input type="text" id="height" value="5"><br>
+                    -->
+                    <button id="create_room" onclick="create_room()">Create Room</button>
+                </div>
             </div>
         </main>
-        <footer class="rounded bordered">
+        <footer class="">
             github history about
         </footer>
     </div>

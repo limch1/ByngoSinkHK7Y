@@ -1,5 +1,6 @@
 const websocket = new ReconnectingWebSocket("ws://localhost:555/");
 
+// Response dispatch; rather than repeating listen code in subpages, distribute events as needed
 websocket.addEventListener("message", ({ data }) => {
     const event = JSON.parse(data);
     console.debug(event)
@@ -19,23 +20,63 @@ websocket.addEventListener("message", ({ data }) => {
         case "SHARE":
             window.dispatchEvent(new CustomEvent("share", {detail: event}));
             break;
+        case "GENERATORS":
+            window.dispatchEvent(new CustomEvent("generators", {detail: event}));
+            break;
+        case "GAMES":
+            window.dispatchEvent(new CustomEvent("games", {detail: event}));
+            break;
         case "ERROR":
             window.dispatchEvent(new CustomEvent("error", {detail: event}));
-            console.error(event);
-            window.alert(event);
+            console.error(event.message);
             break;
     }
 });
 
-function OPEN(roomName, userName, gameEnum, boardType, width, height) {
+function send(object) {
+    console.debug(object);
+    websocket.send(JSON.stringify(object));
+}
+
+function OPEN(roomName, username, game, board) {
     submission = {
         verb: "OPEN",
-        roomName: document.getElementById("roomName").value,
-        username: document.getElementById("username").value,
-        gameEnum: parseInt(document.getElementById("game").value),
-        boardType: parseInt(document.getElementById("board").value),
-        width: parseInt(document.getElementById("width").value),
-        height: parseInt(document.getElementById("height").value)
+        roomName: roomName,
+        username: username,
+        game: game,
+        board: board
     };
-    websocket.send(JSON.stringify(submission));
+    send(submission);
+}
+
+function GET_GENERATORS(game) {
+    submission = {
+        verb: "GET_GENERATORS",
+        game: game
+    }
+    send(submission);
+}
+
+function LIST() {
+    send({verb: "LIST"});
+}
+
+function GAMES() {
+    send({verb: "GET_GAMES"});
+}
+
+function JOIN(roomId, username) {
+    send({
+        verb: "JOIN",
+        roomId: roomId,
+        username: username
+    });
+}
+
+function REJOIN(roomId, userId) {
+    send({
+        verb: "REJOIN",
+        roomId: roomId,
+        userId: userId
+    });
 }

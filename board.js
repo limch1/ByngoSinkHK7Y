@@ -4,6 +4,8 @@ function getBoard() {
     userId = Cookies.get(roomId)
     if (userId === undefined) {
         
+    } else {
+        REJOIN(roomId, userId);
     }
 }
 

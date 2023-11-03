@@ -1,5 +1,8 @@
 body {
     display:grid;
+    background-color: #272b30 !important;
+    color:white !important;
+    box-sizing: border-box;
 }
 
 .rounded {
@@ -7,7 +10,39 @@ body {
 }
 
 .bordered {
-    border: 0.15em solid black;
+    border: 1px solid black;
+}
+
+.window-header {
+    background-color: #3e444c !important;
+    display:block !important;
+    width:100% !important;
+    padding: 0.6em 1em;
+    border-bottom: 0.1em solid black;
+    border-radius: 0.25em;
+    border-bottom-right-radius: 0em;
+    border-bottom-left-radius: 0em;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    gap:0.5em;
+}
+
+.flex-vertical {
+    display: flex;
+    flex-direction: column;
+    row-gap:1em;
+}
+
+.fill {
+    width:100%;
+}
+
+label {
+    white-space: nowrap;
+    vertical-align: middle;
 }
 
 header {
@@ -15,46 +50,58 @@ header {
     justify-self: center;
     padding:1em;
     display: flex;
-    background-color: brown;
+    background-color: #2e3338;
 }
 
 main {
     padding-top: 1em;
     display: flex;
     gap:1em;
+    flex:1;
 }
 
 footer {
-    box-sizing: border-box;
-    background-color: grey;
     justify-self: center;
     display: flex;
     justify-content: right;
     margin-top: 1em;
-    padding: 1em;
+    margin-bottom: 0.5em;
+    font-style: italic;
+    font-weight: 100;
 }
 
 #container {
     padding-top: 1.5rem;
     width: 98vw;
+    min-width: 40em;
     max-width: 80em;
     justify-self: center;
+    display:flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-#room-creation {
+#room-creation-outer {
+    width: 20em;
+    background-color: #2e3338;
+    flex-shrink: 0;
+    height:fit-content;
+}
+
+#room-creation-inner {
     justify-content: center;
     display: flex;
     flex-direction: column;
     gap: 0.1em;
-    width: 20em;
-    background-color: burlywood;
-    padding:1em;
+    padding: 0.75em;
 }
 
-#room-list {
-    background-color: chocolate;
-    padding:1em;
+#room-list-outer {
+    background-color: #2e3338;
     border-color: black;
     width:100%;
-    min-width: 10em;
+}
+
+#room-list-inner {
+    padding:1em;
 }
