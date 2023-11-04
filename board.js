@@ -26,6 +26,39 @@ function exit() {
     window.location.href = "index.html";
 }
 
+function create_with_class(type, cls) {
+    let element = document.createElement(type)
+    element.classList += cls
+    return element
+}
+
+function createBoard(boardMin) {
+    let height = boardMin.height;
+    let width = boardMin.width;
+    let table = document.getElementById("board");
+    table.replaceChildren([]);
+    let headerRow = create_with_class("tr", "bingo-col-header-row");
+    let corner = create_with_class("td", "bingo-col-header");
+    headerRow.appendChild(corner);
+    for (let x = 1; x <= width; x++) {
+        let header = create_with_class("td", "bingo-col-header");
+        header.innerText = "COL" + x;
+        headerRow.appendChild(header);
+    }
+    table.appendChild(headerRow);
+    for (let y = 1; y <= height; y++) {
+        let row = create_with_class("tr", "")
+        let rowHeader = create_with_class("td", "bingo-row-header");
+        rowHeader.innerText = "ROW" + y;
+        row.appendChild(rowHeader);
+        for (let x = 1; x <= width; x++) {
+            let cell = create_with_class("td", "bingo-cell");
+            row.appendChild(cell);
+        }
+        table.appendChild(row);
+    }
+}
+
 websocket.addEventListener("open", getBoard);
 
 // Websocket listeners
@@ -35,10 +68,15 @@ window.addEventListener("NOTFOUND", (data) => {
 
 window.addEventListener("JOINED", (data) => {
     const event = data.detail;
-    const userId = event.userId;
     Cookies.set(event.roomId, event.userId, {sameSite: "strict"});
     document.getElementById("room").hidden = false;
     document.getElementById("login-main").hidden = true;
+    createBoard(event.boardMin);
+});
+
+window.addEventListener("REJOINED", (data) => {
+    const event = data.detail;
+    createBoard(event.boardMin);
 });
 
 window.addEventListener("NOAUTH", (data) => {

@@ -13,13 +13,15 @@ function send(object) {
     websocket.send(JSON.stringify(object));
 }
 
-function OPEN(roomName, username, game, board) {
+function OPEN(roomName, username, game, generator, board, seed) {
     send({
         verb: "OPEN",
         roomName: roomName,
         username: username,
         game: game,
-        board: board
+        generator: generator,
+        board: board,
+        seed: seed
     });
 }
 

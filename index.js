@@ -1,5 +1,3 @@
-var gens = undefined;
-
 websocket.addEventListener("open", () => {
     GAMES();
     LIST();
@@ -11,11 +9,12 @@ websocket.addEventListener("open", () => {
 
 function setLargeBoards() {
     let genDropdown = document.getElementById("generator");
-    console.log(genDropdown.options[genDropdown.selectedIndex]);
     let bool = genDropdown.options[genDropdown.selectedIndex].classList.contains("small");
     for (const opt of document.getElementById("board").getElementsByClassName("large")) {
         opt.disabled = bool;
     }
+    let boardDropdown = document.getElementById("board");
+    boardDropdown.selectedIndex = 0;
 }
 
 // Response listeners
@@ -24,6 +23,9 @@ window.addEventListener("GAMES", (data) => {
     const event = data.detail;
     let games = event.games;
     const gameSelect = document.getElementById("game");
+    for (const element of gameSelect.options) {
+        gameSelect.remove(element.value);
+    }
     for (const game of games) {
         gameSelect.add(new Option(game, game))
     }
@@ -33,10 +35,9 @@ window.addEventListener("GAMES", (data) => {
 window.addEventListener("GENERATORS", (data) => {
     // Get a game's generators (every time game updates)
     const event = data.detail;
-    gens = event.generators;
+    gens = event.generators; 
     const genSelect = document.getElementById("generator");
-    let opts = genSelect.options;
-    for (const element of opts) {
+    for (const element of genSelect.options) {
         genSelect.remove(element.value);
     }
     for (const gen of gens) {
@@ -66,7 +67,9 @@ function create_room() {
     OPEN(document.getElementById("roomName").value,
         document.getElementById("username").value,
         document.getElementById("game").value,
-        document.getElementById("board").value);
+        document.getElementById("generator").value,
+        document.getElementById("board").value,
+        document.getElementById("seed").value);
 }
 
 function join_room(roomId) {
