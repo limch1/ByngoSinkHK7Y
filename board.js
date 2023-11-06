@@ -26,6 +26,11 @@ function exit() {
     window.location.href = "index.html";
 }
 
+function setTitle(title) {
+    document.title = title;
+    document.getElementsByTagName("h1")[0].innerText = "ByngoSink: " + title;
+}
+
 function create_with_class(type, cls) {
     let element = document.createElement(type)
     element.classList += cls
@@ -52,7 +57,9 @@ function createBoard(boardMin) {
         rowHeader.innerText = "ROW" + y;
         row.appendChild(rowHeader);
         for (let x = 1; x <= width; x++) {
+            let index = (y - 1) * width + x - 1
             let cell = create_with_class("td", "bingo-cell");
+            cell.id = "cell" + index
             row.appendChild(cell);
         }
         table.appendChild(row);
@@ -72,11 +79,13 @@ window.addEventListener("JOINED", (data) => {
     document.getElementById("room").hidden = false;
     document.getElementById("login-main").hidden = true;
     createBoard(event.boardMin);
+    setTitle(event.roomName)
 });
 
 window.addEventListener("REJOINED", (data) => {
     const event = data.detail;
     createBoard(event.boardMin);
+    setTitle(event.roomName);
 });
 
 window.addEventListener("NOAUTH", (data) => {

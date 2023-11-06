@@ -27,9 +27,18 @@
     
 }
 
+.team-wrapper {
+    width: fit-content;
+    padding: 0.5rem;
+}
+
 .team-box {
     width:auto;
     height: auto
+}
+
+.team-member {
+    margin: 0;
 }
 
 #room {
@@ -48,14 +57,21 @@
 }
 
 #board {
-    width: fit-content;
-    height: 100vh;
+    width: 80vh;
+    height: 80vh;
 }
 
 #teamSelector {
     display: flex;
     flex-direction: column;
     min-width: 10em;
+    width: 100%;
+}
+
+#teamSelector-inner {
+    background-color: #2e3338;
+    display:flex;
+    flex-wrap: wrap;
 }
 
 #sidebar {
@@ -66,11 +82,31 @@
     max-width: 20em;
 }
 
+#chat-outer {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+}
+
 #chat-inner {
     width: 100%;
-    min-height: 30em;
-    min-width: 20em;
-    background-color: #3a4047;
+    height: 30em;
+    width: 20em;
+    background-color: #2e3338;
+    display:flex;
+    flex-direction: column;
+}
+
+#chat-box {
+    overflow-y: scroll;
+    text-wrap: wrap;
+}
+
+#chat-message-box {
+    width: 100%;
+    min-height: 3rem;
+    height:fit-content;
+    margin-top: auto;
 }
 
 #exit {

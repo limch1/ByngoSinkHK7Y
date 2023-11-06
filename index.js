@@ -23,9 +23,7 @@ window.addEventListener("GAMES", (data) => {
     const event = data.detail;
     let games = event.games;
     const gameSelect = document.getElementById("game");
-    for (const element of gameSelect.options) {
-        gameSelect.remove(element.value);
-    }
+    gameSelect.innerHTML = "";
     for (const game of games) {
         gameSelect.add(new Option(game, game))
     }
@@ -36,10 +34,8 @@ window.addEventListener("GENERATORS", (data) => {
     // Get a game's generators (every time game updates)
     const event = data.detail;
     gens = event.generators; 
-    const genSelect = document.getElementById("generator");
-    for (const element of genSelect.options) {
-        genSelect.remove(element.value);
-    }
+    let genSelect = document.getElementById("generator");
+    genSelect.innerHTML = "";
     for (const gen of gens) {
         let opt = new Option(gen.name, gen.name);
         if (gen.small) { opt.classList.add("small"); }

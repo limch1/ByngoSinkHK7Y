@@ -16,7 +16,7 @@
 <body>
     <div id="container">
         <header class="rounded bordered">
-            <h1>ByngoSink: a replacement for BingoSync</h1>
+            <h1>ByngoSink: </h1>
         </header>
         <main id="room">
             <div id="board-container" class="">
@@ -26,24 +26,92 @@
             <div id="sidebar">
                 <div id="teamSelector">
                     <div class="window-header">
-                        here is teams
+                        here is teams 
+                        <button id="teamCreation" onclick="createTeamDialog()">Add Team</button>
                     </div>
-                    <div class="team-box bordered">
-                        Team
-                    </div>
-                </div>
-                <div id="chat-outer">
-                    <div class="window-header">
-                        Here is chat
-                    </div>
-                    <div id="chat-inner">
-
+                    <div id="teamSelector-inner">
+                        <div class="team-wrapper">
+                            <div class="team-box bordered">
+                                Team
+                            </div>
+                            <p class="team-member">Member</p>
+                            <p class="team-member">Member</p>
+                        </div>
+                        <div class="team-wrapper">
+                            <div class="team-box bordered">
+                                Team
+                            </div>
+                            <p class="team-member">Member</p>
+                        </div>
+                        <div class="team-wrapper">
+                            <div class="team-box bordered">
+                                Team
+                            </div>
+                            <p class="team-member">Member</p>
+                            <p class="team-member">Member</p>
+                            <p class="team-member">Member</p>
+                            <p class="team-member">Member</p>
+                        </div>
+                        <div class="team-wrapper">
+                            <div class="team-box bordered">
+                                Team
+                            </div>
+                            <p class="team-member">Member</p>
+                            <p class="team-member">Member</p>
+                            <p class="team-member">Member</p>
+                            <p class="team-member">Member</p>
+                        </div>
                     </div>
                     
                 </div>
+                <div id="chat-outer" class="rounded bordered">
+                    <div class="window-header">
+                        Here is chat
+                    </div>
+                    <div id="chat-inner" class="rounded">
+                        <div id="chat-box">
+                            <p>here chat messages</p>
+                            <p>here chat messages</p>
+                            <p>here chat messages</p>
+                            <p>here chat messages</p>
+                            <p>here chat messages</p>
+                            <p>here chat messages</p>
+                            <p>here chat messages</p>
+                            <p>here chat messages</p>
+                            <p>here chat messages</p>
+                            <p>here chat messages</p>
+                            <p>here chat messages</p>
+                            <p>here chat messages</p>
+                            <p>here chat messages</p>
+                            <p>here chat messages</p>
+                            <p>here chat messages</p>
+                            <p>here chat messages</p>
+                            <p>here chat messages</p>
+                            <p>here chat messages</p>
+                            <p>here chat messages</p>
+                            <p>here chat messages</p>
+                            <p>here chat messages</p>
+                            <p>here chat messages</p>
+                            <p>here chat messages</p>
+                            <p>here chat messages</p>
+                            <p>here chat messages</p>
+                        </div>
+                        <div id="chat-message-box" class="rounded">
+                            here's where you type
+                        </div>
+                    </div>
+
+                </div>
                 <button id="Exit" onclick="exit()">Exit Room</button>
             </div>
-            
+            <div id="team-creation" style="display:flex; flex-direction: column; gap:1rem;">
+                <!-- This should be a modal, but I CBA -->
+                Name
+                <input id="team-name">
+                Color
+                <input id="team-color">
+                <button id="team-submit">Create Team</button>
+            </div>
             
         </main>
         <main id="login-main" hidden>
