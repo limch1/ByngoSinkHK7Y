@@ -46,9 +46,21 @@ window.addEventListener("GENERATORS", (data) => {
     setLargeBoards();
 });
 
-
 window.addEventListener("LISTED", (data) => {
     const event = data.detail;
+    const roomList = document.getElementById("room-list-inner");
+    roomList.innerHTML = "";
+    for (const [roomId, roomData] of Object.entries(event.list)) {
+        let row = document.createElement("p");
+        let link = document.createElement("a");
+        link.setAttribute("href", "board.html?id=" + roomId)
+        let linkText = document.createTextNode(roomData.name);
+        link.appendChild(linkText);
+        row.appendChild(link);
+        let textNode = document.createTextNode(" | " + roomData.game + " | " +  roomData.variant + " | " + roomData.board + " | " + roomData.count)
+        row.appendChild(textNode);
+        roomList.appendChild(row);
+    }
 });
 
 window.addEventListener("OPENED", (data) => {
