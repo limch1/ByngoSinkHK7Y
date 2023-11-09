@@ -5,6 +5,7 @@ websocket.addEventListener("open", () => {
     gameDropdown.addEventListener("input", (event) => {
         GET_GENERATORS(gameDropdown.value);
     });
+    document.getElementById("generator").addEventListener("input", setLargeBoards);
 });
 
 function setLargeBoards() {
