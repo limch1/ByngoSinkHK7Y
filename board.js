@@ -42,19 +42,19 @@ function createBoard(boardMin) {
     let width = boardMin.width;
     let table = document.getElementById("board");
     table.replaceChildren([]);
-    let headerRow = create_with_class("tr", "bingo-col-header-row");
-    let corner = create_with_class("td", "bingo-col-header");
+    let headerRow = create_with_class("thead", "bingo-col-header-row");
+    let corner = create_with_class("th", "bingo-col-header");
     headerRow.appendChild(corner);
     for (let x = 1; x <= width; x++) {
-        let header = create_with_class("td", "bingo-col-header");
-        header.innerText = "COL" + x;
+        let header = create_with_class("th", "bingo-col-header");
+        header.innerText = x;
         headerRow.appendChild(header);
     }
     table.appendChild(headerRow);
     for (let y = 1; y <= height; y++) {
         let row = create_with_class("tr", "")
-        let rowHeader = create_with_class("td", "bingo-row-header");
-        rowHeader.innerText = "ROW" + y;
+        let rowHeader = create_with_class("th", "bingo-row-header");
+        rowHeader.innerText = y;
         row.appendChild(rowHeader);
         for (let x = 1; x <= width; x++) {
             let index = (y - 1) * width + x - 1
@@ -64,6 +64,38 @@ function createBoard(boardMin) {
         }
         table.appendChild(row);
     }
+}
+
+function fillBoard(boardData) {
+    let goals = boardData.goals;
+    let marks = boardData.marks;
+    if (goals != undefined) {
+        for (const i in goals) {
+            goal = goals[i];
+            const cell = document.getElementById("cell"+ i);
+            const para = document.createElement("div");
+            para.className = "bingo-cell-content";
+            const node = document.createTextNode(goal.name);
+            para.appendChild(node);
+            cell.replaceChildren(para);
+            cell.onclick = markGoal;
+        }
+    }
+    if (marks != undefined) {
+        for (const i in marks) {
+
+        }
+    }
+}
+
+function markGoal(event) {
+    let cell = event.target;
+    if (event.target.className == "bingo-cell-content") {
+        cell = event.target.parentElement;
+    }
+    const id = cell.id.replace("cell", "");
+    console.log(id);
+    
 }
 
 websocket.addEventListener("open", getBoard);
@@ -78,14 +110,16 @@ window.addEventListener("JOINED", (data) => {
     Cookies.set(event.roomId, event.userId, {sameSite: "strict"});
     document.getElementById("room").hidden = false;
     document.getElementById("login-main").hidden = true;
+    setTitle(event.roomName);
     createBoard(event.boardMin);
-    setTitle(event.roomName)
+    fillBoard(event.boardMin);
 });
 
 window.addEventListener("REJOINED", (data) => {
     const event = data.detail;
-    createBoard(event.boardMin);
     setTitle(event.roomName);
+    createBoard(event.boardMin);
+    fillBoard(event.boardMin);
 });
 
 window.addEventListener("NOAUTH", (data) => {
