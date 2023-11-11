@@ -88,6 +88,14 @@ function fillBoard(boardData) {
     }
 }
 
+function createTeam() {
+    //document.getElementById("team-submit").disabled = true;
+
+    CREATE_TEAM(roomId,
+        document.getElementById("team-name").value,
+        document.getElementById("team-color").value);
+}
+
 function markGoal(event) {
     let cell = event.target;
     if (event.target.className == "bingo-cell-content") {

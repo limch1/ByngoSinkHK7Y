@@ -63,3 +63,12 @@ function EXIT(roomId, userId) {
         userId: userId
     });
 }
+
+function CREATE_TEAM(roomId, team_name, colour) {
+    send({
+        verb: "CREATE_TEAM",
+        roomId: roomId,
+        name: team_name,
+        colour: colour
+    })
+}
