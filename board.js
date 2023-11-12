@@ -150,6 +150,7 @@ window.addEventListener("REJOINED", (data) => {
 
 window.addEventListener("UPDATE", (data) => {
     const event = data.detail;
+    fillBoard(event.board);
 });
 
 window.addEventListener("NOAUTH", (data) => {
