@@ -121,8 +121,7 @@ function markGoal(event) {
         cell = event.target.parentElement;
     }
     const id = cell.id.replace("cell", "");
-    console.log(id);
-    
+    MARK(roomId, id);
 }
 
 websocket.addEventListener("open", getBoard);
@@ -147,6 +146,10 @@ window.addEventListener("REJOINED", (data) => {
     setTitle(event.roomName);
     createBoard(event.boardMin);
     fillBoard(event.boardMin);
+});
+
+window.addEventListener("UPDATE", (data) => {
+    const event = data.detail;
 });
 
 window.addEventListener("NOAUTH", (data) => {

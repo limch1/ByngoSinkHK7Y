@@ -70,5 +70,13 @@ function CREATE_TEAM(roomId, team_name, colour) {
         roomId: roomId,
         name: team_name,
         colour: colour
-    })
+    });
+}
+
+function MARK(roomId, goalId) {
+    send({
+        verb: "MARK",
+        roomId: roomId,
+        goalId: goalId
+    });
 }
