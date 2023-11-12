@@ -1,6 +1,25 @@
 var urlParams = new URLSearchParams(window.location.search);
 const roomId = urlParams.get("id");
 const userId = Cookies.get(roomId);
+
+Coloris({
+    themeMode: 'dark',
+    alpha: false,
+    swatches: [
+        "#cc6e8f",
+    "#FF0000",
+    "#FFA500",
+    "#8B4513",
+    "#FFFF00",
+    "#00FF00",
+    "#008080",
+    "#00FFFF",
+    "#000080",
+    "#9400D3"
+    ],
+    closeButton: true
+  });
+
 // Get board on websocket load
 function getBoard() {
     if (userId === undefined) {
