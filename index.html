@@ -24,7 +24,7 @@
             <div id="room-list-outer" class="rounded bordered">
                 <div class="window-header">Room List</div>
                 <div id="room-list-inner">
-                    <p>This is where the room list will go</p>
+                    <p>Websocket not connected: Allow the connection <a href="https://byngosink-ws.play.manicjamie.com:21317/">here</a></p>
                 </div>
             </div>
     
@@ -71,8 +71,12 @@
                 </div>
             </div>
         </main>
-        <footer class="">
-            github history about
+        <footer class="flex">
+            <div id="ws-url-wrapper">
+                Websocket URL:
+                <input id="websocket-url" type="text" value="wss://byngosink-ws.play.manicjamie.com:21317/">
+            </div>
+            <div class="flex">github about</div>
         </footer>
     </div>
 </body>

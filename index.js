@@ -34,7 +34,7 @@ window.addEventListener("GAMES", (data) => {
 window.addEventListener("GENERATORS", (data) => {
     // Get a game's generators (every time game updates)
     const event = data.detail;
-    gens = event.generators; 
+    let gens = event.generators; 
     let genSelect = document.getElementById("generator");
     genSelect.innerHTML = "";
     for (const gen of gens) {
@@ -86,6 +86,14 @@ function join_room(roomId) {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-
+    let wsUrl = Cookies.get("wsUrl");
+    if (wsUrl != null) {
+        document.getElementById("websocket-url").value = wsUrl;
+    }
+    document.getElementById("websocket-url").addEventListener("change", (event) => {
+        console.log("Websocket chaning to " + event.target.value);
+        websocket = new ReconnectingWebSocket(event.target.value);
+        Cookies.set("wsUrl", event.target.value, {sameSite: "strict"});
+    });
 });
 

@@ -140,3 +140,13 @@ footer {
 #room-list-inner {
     padding:1em;
 }
+
+#websocket-url {
+    width: 100%;
+}
+
+#ws-url-wrapper {
+    display: flex;
+    text-wrap: nowrap;
+    width:30rem;
+}
