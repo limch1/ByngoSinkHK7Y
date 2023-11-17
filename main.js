@@ -1,4 +1,4 @@
-const websocket = new ReconnectingWebSocket("ws://such-plastics.gl.at.ply.gg:21317/"); // Port 555, this is a playit domain that reallocates port
+const websocket = new ReconnectingWebSocket("wss://byngosink-ws.play.manicjamie.com:21317/"); // Port 555, this is a playit domain that reallocates port
 
 // Response dispatch; rather than repeating listen code in subpages, distribute events as needed
 websocket.addEventListener("message", ({ data }) => {
@@ -6,6 +6,10 @@ websocket.addEventListener("message", ({ data }) => {
     console.debug(event);
     if (event.verb == "ERROR") { console.error(event.message) }
     window.dispatchEvent(new CustomEvent(event.verb, {detail: event}));
+});
+
+websocket.addEventListener("error", ({data}) => {
+    console.error(data);
 });
 
 function send(object) {
