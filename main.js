@@ -8,8 +8,8 @@ websocket.addEventListener("message", ({ data }) => {
     window.dispatchEvent(new CustomEvent(event.verb, {detail: event}));
 });
 
-websocket.addEventListener("error", ({data}) => {
-    console.error(data);
+websocket.addEventListener("error", (event) => {
+    console.error(event);
 });
 
 function send(object) {
