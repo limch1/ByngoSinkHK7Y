@@ -219,6 +219,12 @@ window.addEventListener("TEAM_JOINED", (data) => {
     fillBoard(event.board, event.teamColours);
 });
 
+window.addEventListener("TEAM_CREATED", (data) => {
+    const event = data.detail;
+    createBoard(event.board);
+    fillBoard(event.board, event.teamColours);
+});
+
 window.addEventListener("UPDATE", (data) => {
     const event = data.detail;
     fillBoard(event.board, event.teamColours);
