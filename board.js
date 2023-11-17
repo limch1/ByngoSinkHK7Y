@@ -1,8 +1,16 @@
 var urlParams = new URLSearchParams(window.location.search);
 const roomId = urlParams.get("id");
 const userId = Cookies.get(roomId);
+var teamDialog = null;
 
+window.addEventListener("DOMContentLoaded", () => {
+    teamDialog = document.getElementById("teamDialog");
+});
+
+/*
 Coloris({
+    //parent: "#teamDialog-wrapper",
+    theme: "default",
     themeMode: 'dark',
     alpha: false,
     swatches: [
@@ -17,8 +25,8 @@ Coloris({
     "#000080",
     "#9400D3"
     ],
-    closeButton: true
   });
+*/
 
 // Get board on websocket load
 function getBoard() {
@@ -85,12 +93,12 @@ function createBoard(boardMin) {
     }
 }
 
-function fillBoard(boardData) {
+function fillBoard(boardData, teamColours) {
     let goals = boardData.goals;
     let marks = boardData.marks;
     if (goals != undefined) {
         for (const i in goals) {
-            goal = goals[i];
+            let goal = goals[i];
             const cell = document.getElementById("cell"+ i);
             const para = document.createElement("div");
             para.className = "bingo-cell-content";
@@ -98,21 +106,53 @@ function fillBoard(boardData) {
             para.appendChild(node);
             cell.replaceChildren(para);
             cell.onclick = markGoal;
+            fitText(para, 0.7);
         }
     }
-    if (marks != undefined) {
-        for (const i in marks) {
+    if (marks != undefined && teamColours != undefined) {
+        var all_marks = {};
+        for (const teamId in marks) {
+            let colour = teamColours[teamId];
+            for (const marked of marks[teamId]) {
+                if (all_marks[marked] == undefined) {
+                    all_marks[marked] = [colour];
+                } else {
+                    all_marks[marked] += colour;
+                }
+            }
+        }
+        for (const goalId in all_marks) {
+            const cell = document.getElementById("cell"+ goalId); // TODO: actually use blocks for this
+            cell.setAttribute("style", "background-color: " + all_marks[goalId][0] + ";");
+        }
+    }
+    
+}
 
-        }
-    }
+function closeTeamDialog() {
+    teamDialog.close();
+}
+
+function noPropagate(event) {
+    event.stopPropagation();
+}
+
+function createTeamDialog() {
+    teamDialog.showModal();
 }
 
 function createTeam() {
-    //document.getElementById("team-submit").disabled = true;
-
     CREATE_TEAM(roomId,
         document.getElementById("team-name").value,
         document.getElementById("team-color").value);
+    
+    teamDialog.close();
+}
+
+function joinTeam(el) {
+    console.log(el);
+    let teamid = el.getAttribute("teamid");
+    JOIN_TEAM(roomId, teamid);
 }
 
 function markGoal(event) {
@@ -138,19 +178,50 @@ window.addEventListener("JOINED", (data) => {
     document.getElementById("login-main").hidden = true;
     setTitle(event.roomName);
     createBoard(event.boardMin);
-    fillBoard(event.boardMin);
+    fillBoard(event.boardMin, event.teamColours);
 });
 
 window.addEventListener("REJOINED", (data) => {
     const event = data.detail;
     setTitle(event.roomName);
     createBoard(event.boardMin);
-    fillBoard(event.boardMin);
+    fillBoard(event.boardMin, event.teamColours);
+});
+
+window.addEventListener("MEMBERS", (data) => {
+    const event = data.detail;
+    const teamSelectorInner = document.getElementById("teamSelector-inner");
+    teamSelectorInner.textContent = "";
+    for (const teamId in event.teams) {
+        teamView = event.teams[teamId];
+        let teamWrapper = create_with_class("div", "team-wrapper");
+        teamWrapper.setAttribute("teamId", teamId);
+        teamWrapper.setAttribute("ondblclick", "joinTeam(this)");
+        let teamBox = create_with_class("div", "team-box bordered");
+        teamBox.setAttribute("style", "background-color: " + teamView.colour + ";");
+        teamBox.innerText = teamView.name;
+        teamWrapper.appendChild(teamBox);
+        for (const member of teamView.members) {
+            let memberPara = create_with_class("p", "team-member");
+            memberPara.innerText = member.name;
+            if (!member.connected) {
+                memberPara.classList.add("disconnected");
+            }
+            teamWrapper.appendChild(memberPara);
+        }
+        teamSelectorInner.appendChild(teamWrapper);
+    }
+});
+
+window.addEventListener("TEAM_JOINED", (data) => {
+    const event = data.detail;
+    createBoard(event.board);
+    fillBoard(event.board, event.teamColours);
 });
 
 window.addEventListener("UPDATE", (data) => {
     const event = data.detail;
-    fillBoard(event.board);
+    fillBoard(event.board, event.teamColours);
 });
 
 window.addEventListener("NOAUTH", (data) => {

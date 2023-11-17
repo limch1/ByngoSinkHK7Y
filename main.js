@@ -1,4 +1,4 @@
-const websocket = new ReconnectingWebSocket("ws://such-plastics.gl.at.ply.gg:21317/"); // Port 555, this is a playit domain that reallocates port
+const websocket = new ReconnectingWebSocket("ws://localhost:555/"); // Port 555, this is a playit domain that reallocates port
 
 // Response dispatch; rather than repeating listen code in subpages, distribute events as needed
 websocket.addEventListener("message", ({ data }) => {
@@ -70,6 +70,14 @@ function CREATE_TEAM(roomId, team_name, colour) {
         roomId: roomId,
         name: team_name,
         colour: colour
+    });
+}
+
+function JOIN_TEAM(roomId, teamId) {
+    send({
+        verb: "JOIN_TEAM",
+        roomId: roomId,
+        teamId: teamId
     });
 }
 

@@ -12,6 +12,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.min.js" integrity="sha512-B4skI5FiLurS86aioJx9VfozI1wjqrn6aTdJH+YQUmCZum/ZibPBTX55k5d9XM6EsKePDInkLVrN7vPmJxc1qA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css"/>
     <script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
+    <script src="lib/fittext.js"></script>
     <script src='main.js'></script>
     <script src='board.js'></script>
 </head>
@@ -30,40 +31,9 @@
                 <div id="teamSelector">
                     <div class="window-header">
                         here is teams 
-                        <button id="teamCreation" onclick="createTeamDialog()">Add Team</button>
+                        <button id="teamDialogButton" onclick="createTeamDialog()">Add Team</button>
                     </div>
                     <div id="teamSelector-inner">
-                        <div class="team-wrapper">
-                            <div class="team-box bordered">
-                                Team
-                            </div>
-                            <p class="team-member">Member</p>
-                            <p class="team-member">Member</p>
-                        </div>
-                        <div class="team-wrapper">
-                            <div class="team-box bordered">
-                                Team
-                            </div>
-                            <p class="team-member">Member</p>
-                        </div>
-                        <div class="team-wrapper">
-                            <div class="team-box bordered">
-                                Team
-                            </div>
-                            <p class="team-member">Member</p>
-                            <p class="team-member">Member</p>
-                            <p class="team-member">Member</p>
-                            <p class="team-member">Member</p>
-                        </div>
-                        <div class="team-wrapper">
-                            <div class="team-box bordered">
-                                Team
-                            </div>
-                            <p class="team-member">Member</p>
-                            <p class="team-member">Member</p>
-                            <p class="team-member">Member</p>
-                            <p class="team-member">Member</p>
-                        </div>
                     </div>
                     
                 </div>
@@ -106,18 +76,16 @@
 
                 </div>
                 <button id="Exit" onclick="exit()">Exit Room</button>
-                <footer>
-                    github history about
-                </footer>
             </div>
-            <div id="team-creation" style="display:flex; flex-direction: column; gap:0.5rem;">
-                <!-- This should be a modal, but I CBA -->
-                Name
-                <input id="team-name">
-                Color
-                <input id="team-color" data-coloris style="position:relative; z-index: 1000;">
-                <button id="team-submit" onclick="createTeam()">Create Team</button>
-            </div>
+            <dialog id="teamDialog" onclick="closeTeamDialog()">
+                <div id="teamDialog-wrapper" onclick="noPropagate(event)">
+                    Name
+                    <input id="team-name">
+                    Color
+                    <input id="team-color" type="color" style="position:relative; z-index: 1000;">
+                    <button id="team-submit" onclick="createTeam()">Create Team</button>
+                </div>
+            </dialog>
             
         </main>
         <main id="login-main" hidden>

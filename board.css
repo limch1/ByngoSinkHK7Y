@@ -1,13 +1,19 @@
+body {
+    --cell-width: 1rem;
+    --cell-height: 1rem;
+}
+
 #board-container {
     aspect-ratio: 1.2 / 1;
-    height: 98vh;
+    height: 55rem;
 }
 
 #board {
-    height:100%;
+    height: 100%;
     width: 100%;
     container-type: size;
-    background-color: #181818 !important;
+    background-color: #181818;
+    table-layout: fixed;
 }
 
 .bingo-col-header {
@@ -19,11 +25,11 @@
 }
 
 .bingo-col-header-row {
-    height:fit-content;
+    height: 0.5rem;
 }
 
 .bingo-row-header {
-    width: 0.5rem;
+    width: 1rem;
     border: 1px solid black;
     background-color: rgb(25, 25, 71);
     font-size: small;
@@ -31,27 +37,33 @@
 }
 
 .bingo-cell {
-    aspect-ratio: 1 / 1;
-    
+    height: var(--cell-height);
     box-sizing: border-box;
-    overflow:visible;
+    overflow:hidden;
     border: 1px solid black;
     text-align: center;
-    padding: 0rem 0rem;
-    container-type: size;
+    padding: 0rem 0.2rem;
+    display:table-cell;
+    text-align: center;
+    vertical-align: top;
 }
 
 .bingo-cell:hover {
-    background-color: #616161 !important;
+    background-color: #616161;
 }
 
 .bingo-cell-content {
-    font-size: 1cqh;
+    font-size: 0.65rem;
+    width: inherit;
+    height:inherit;
+    margin-top: 0px;
+    overflow: visible;
 }
 
 .team-wrapper {
     width: fit-content;
     padding: 0.5rem;
+    min-width: 5rem;
 }
 
 .team-box {
@@ -61,6 +73,23 @@
 
 .team-member {
     margin: 0;
+}
+
+#teamDialog {
+    padding: 0rem;
+}
+
+#teamDialog-wrapper {
+    position:relative;
+    top: 0px;
+    left: 0px;
+    width: 50vw;
+    height: 50vh;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    gap: 1rem;
 }
 
 #room {
