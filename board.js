@@ -173,7 +173,7 @@ window.addEventListener("NOTFOUND", (data) => {
 
 window.addEventListener("JOINED", (data) => {
     const event = data.detail;
-    Cookies.set(event.roomId, event.userId, {sameSite: "strict"});
+    Cookies.set(roomId, event.userId, {sameSite: "strict"});
     document.getElementById("room").hidden = false;
     document.getElementById("login-main").hidden = true;
     setTitle(event.roomName);
