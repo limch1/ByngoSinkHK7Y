@@ -119,6 +119,10 @@ body {
     flex-wrap: wrap;
 }
 
+.disconnected {
+    color:#adadad
+}
+
 #sidebar {
     display:flex;
     flex-grow: 1;
