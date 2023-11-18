@@ -1,8 +1,9 @@
 var wsUrl = Cookies.get("wsUrl");
-if (wsUrl != null) {
-    wsUrl = "wss://byngosink-ws.play.manicjamie.com:21317/"
+if (wsUrl == undefined) {
+    wsUrl = "wss://byngosink-ws.manicjamie.com:555/" // Port 555, this is a playit domain that reallocates port
 }
-var websocket = new ReconnectingWebSocket(wsUrl); // Port 555, this is a playit domain that reallocates port
+console.debug(wsUrl);
+var websocket = new ReconnectingWebSocket(wsUrl); 
 
 // Response dispatch; rather than repeating listen code in subpages, distribute events as needed
 websocket.addEventListener("message", ({ data }) => {
