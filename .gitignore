@@ -2,9 +2,4 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/.vs/ByngoSink/v17
-/.vs/ByngoSink/FileContentIndex
 /.vs
-/node_modules
-/package.json
-/package-lock.json
