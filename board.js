@@ -233,9 +233,7 @@ function fillBoard(boardData, teamColours) {
             svg.replaceChildren([]);
             buildSvgShapes(all_marks[cellId], svg, cell);
         }
-        console.log("Filled things");
     }
-    
 }
 
 function closeTeamDialog() {
