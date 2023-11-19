@@ -234,3 +234,16 @@ window.addEventListener("NOAUTH", (data) => {
     revealLogin();
     Cookies.remove(roomId);
 });
+
+window.addEventListener("DOMContentLoaded", () => {
+    let wsUrl = Cookies.get("wsUrl");
+    if (wsUrl != null) {
+        document.getElementById("websocket-url").value = wsUrl;
+    }
+    document.getElementById("websocket-url").addEventListener("change", (event) => {
+        console.log("Websocket chaning to " + event.target.value);
+        websocket = new ReconnectingWebSocket(event.target.value);
+        subscribeWebsocket();
+        Cookies.set("wsUrl", event.target.value, {sameSite: "strict"});
+    });
+});

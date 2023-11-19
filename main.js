@@ -6,16 +6,19 @@ console.debug("Starting connection to " + wsUrl);
 var websocket = new ReconnectingWebSocket(wsUrl); 
 
 // Response dispatch; rather than repeating listen code in subpages, distribute events as needed
-websocket.addEventListener("message", ({ data }) => {
+function socket_message(data) {
     const event = JSON.parse(data);
     console.debug(event);
     if (event.verb == "ERROR") { console.error(event.message) }
     window.dispatchEvent(new CustomEvent(event.verb, {detail: event}));
-});
+}
 
-websocket.addEventListener("error", (event) => {
-    console.error(event);
-});
+function subscribeWebsocket() {
+    websocket.addEventListener("message", ({ data }) => socket_message(data));
+    websocket.addEventListener("error", (event) => console.error(event));
+}
+
+subscribeWebsocket();
 
 function send(object) {
     console.debug("sending" + JSON.stringify(object));
