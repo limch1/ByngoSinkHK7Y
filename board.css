@@ -46,6 +46,7 @@ body {
     display:table-cell;
     text-align: center;
     vertical-align: top;
+    z-index: 0;
 }
 
 .bingo-cell:hover {
@@ -58,6 +59,14 @@ body {
     height:inherit;
     margin-top: 0px;
     overflow: visible;
+}
+
+.svg-container {
+    position: relative;
+    width: 0;
+    height: 0;
+    left: -5px;
+    z-index: -1;
 }
 
 .team-wrapper {

@@ -2,6 +2,42 @@ var urlParams = new URLSearchParams(window.location.search);
 const roomId = urlParams.get("id");
 const userId = Cookies.get(roomId);
 var teamDialog = null;
+var cellStates = {};
+var lastHover = -1;
+
+class CellState {
+    goal = "";
+    hover = false;
+    marked = [];
+
+    updateGoal(newGoal) {
+        if (this.goal != newGoal) {
+            this.goal = newGoal;
+            return true;
+        }
+        return false;
+    }
+
+    updateHover(newHover) {
+        if (this.hover != newHover) {
+            this.hover = newHover;
+            return true;
+        }
+        return false;
+    }
+
+    updateMarked(newMarked) {
+        if (this.marked !== newMarked) {
+            this.marked = newMarked;
+            return true;
+        }
+        return false;
+    }
+}
+
+const areaSkew = 0.7;
+const hoverColour = "#616161";
+const hoverPct = 0.5;
 
 window.addEventListener("DOMContentLoaded", () => {
     teamDialog = document.getElementById("teamDialog");
@@ -64,11 +100,16 @@ function create_with_class(type, cls) {
     return element
 }
 
+function create_svg(type) {
+    return document.createElementNS("http://www.w3.org/2000/svg", type);
+}
+
 function createBoard(boardMin) {
     let height = boardMin.height;
     let width = boardMin.width;
     let table = document.getElementById("board");
     table.replaceChildren([]);
+    cellStates = {};
     let headerRow = create_with_class("thead", "bingo-col-header-row");
     let corner = create_with_class("th", "bingo-col-header");
     headerRow.appendChild(corner);
@@ -85,48 +126,184 @@ function createBoard(boardMin) {
         row.appendChild(rowHeader);
         for (let x = 1; x <= width; x++) {
             let index = (y - 1) * width + x - 1
+            cellStates[index] = new CellState();
             let cell = create_with_class("td", "bingo-cell");
-            cell.id = "cell" + index
+            cell.id = "cell" + index;
+            cell.addEventListener("mouseover", onCellHoverChanged(index));
+            cell.addEventListener("mouseleave", onCellHoverChanged(index));
+            let svgDiv = create_with_class("div", "svg-container");
+            let svg = create_svg("svg");
+            svg.id = "cell-bg" + index;
+            svgDiv.appendChild(svg);
+            cell.appendChild(svgDiv);
+            let textDiv = create_with_class("div", "bingo-cell-content");
+            textDiv.id = "cell-text" + index
+            cell.appendChild(textDiv);
             row.appendChild(cell);
         }
         table.appendChild(row);
     }
+    boardDims = boardMin;
+}
+
+function skew(frac) {
+    return Math.pow(frac, areaSkew);
+}
+
+function reverseSkew(frac) {
+    return 1 - skew(1 - frac);
+}
+
+function topPoint(pct) {
+    if (pct <= 0.5) return [skew(pct / 0.5), 0];
+    else return [1, reverseSkew((pct - 0.5) / 0.5)];
+}
+
+function botPoint(pct) {
+    if (pct <= 0.5) return [0, skew(pct / 0.5)];
+    else return [reverseSkew((pct - 0.5) / 0.5), 1];
+}
+
+function computePolygon(startPct, endPct) {
+    const points = []
+    if (startPct > 0) {
+        points.push(topPoint(startPct));
+    } else {
+        points.push([0, 0])
+    }
+    if (startPct < 0.5 && endPct > 0.5) {
+        points.push([1, 0]);
+    }
+    if (endPct < 1) {
+        points.push(topPoint(endPct));
+        points.push(botPoint(endPct));
+    } else {
+        points.push([1, 1]);
+    }
+    if (startPct < 0.5 && endPct > 0.5) {
+        points.push([0, 1]);
+    }
+    if (startPct > 0) {
+        points.push(botPoint(startPct));
+    }
+
+    return points;
+}
+
+function computePolygons(count) {
+    pcts = [0];
+    for (i = 1; i < count; i++) {
+        // TODO: Use non-linear distribution for better area sharing
+        pcts.push(i * 1.0 / count);
+    }
+    pcts.push(1);
+
+    polygons = [];
+    for (i = 0; i < pcts.length - 1; i++) {
+        polygons.push(computePolygon(pcts[i], pcts[i + 1]));
+    }
+    return polygons;
+}
+
+function pointPrinter(width, height) {
+    function scaler(point) {
+        let [x, y] = point;
+        return `${x * width},${y * height}`
+    }
+    return scaler;
+}
+
+function getRGB(colour) {
+    return [parseInt(colour.substring(1, 3), 16), parseInt(colour.substring(3, 5), 16), parseInt(colour.substring(5, 7), 16)];
+}
+
+function interpolate(colour1, colour2, pct) {
+    var [r1, g1, b1] = getRGB(colour1);
+    var [r2, g2, b2] = getRGB(colour2);
+    const r = Math.round(r1 + (r2 - r1) * pct);
+    const g = Math.round(g1 + (g2 - g1) * pct);
+    const b = Math.round(b1 + (b2 - b1) * pct);
+    return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+}
+
+function buildSvgShapes(cell, svg, colours, hover) {
+    if (colours.length == 0) {
+        svg.width = 0;
+        svg.height = 0;
+        return;
+    }
+
+    let rect = cell.getBoundingClientRect();
+    let width = Math.trunc(rect.right - rect.left) + 4;
+    let height = Math.trunc(rect.bottom - rect.top);
+    svg.setAttribute('width', `${width}`);
+    svg.setAttribute('height', `${height}`);
+
+    polygons = computePolygons(colours.length);
+    for (i = 0; i < polygons.length; i++) {
+        node = create_svg("polygon");
+        node.setAttribute('points', polygons[i].map(pointPrinter(width, height)).join(' '));
+        let colour = colours[i];
+        if (hover) colour = interpolate(colour, hoverColour, hoverPct);
+        node.style = `fill:${colour};stroke:black;stroke-width:1`;
+        svg.appendChild(node);
+    }
+}
+
+function updateCellMarkings(index, teamColours) {
+    if (index == -1) return;
+
+    const cell = document.getElementById("cell" + index);
+    let newHover = cell.matches(':hover');
+    if (newHover) lastHover = index;
+    let updated = false;
+
+    let state = cellStates[index];
+    if (teamColours != undefined && state.updateMarked(teamColours)) updated = true;
+    if (state.updateHover(newHover)) updated = true;
+    if (!updated) return;
+
+    const svg = document.getElementById("cell-bg" + index);
+    svg.replaceChildren([]);
+    buildSvgShapes(cell, svg, state.marked, state.hover);
 }
 
 function fillBoard(boardData, teamColours) {
+    // Update local state.
     let goals = boardData.goals;
     let marks = boardData.marks;
     if (goals != undefined) {
         for (const i in goals) {
             let goal = goals[i];
-            const cell = document.getElementById("cell"+ i);
-            const para = document.createElement("div");
-            para.className = "bingo-cell-content";
-            const node = document.createTextNode(goal.name);
-            para.appendChild(node);
-            cell.replaceChildren(para);
-            cell.onclick = markGoal;
-            fitText(para, 0.7);
+            let state = cellStates[i];
+            if (state.updateGoal(goal)) {
+                const textDiv = document.getElementById("cell-text" + i);
+                const node = document.createTextNode(goal.name);
+                textDiv.replaceChildren(node);
+                fitText(textDiv, 0.7);
+
+                // TODO: Separate revelation from markability (for Invasion)
+                const cell = document.getElementById("cell" + i);
+                cell.onclick = markGoal(i);
+            }
         }
     }
     if (marks != undefined && teamColours != undefined) {
         var all_marks = {};
+        let maxId = boardDims.width * boardDims.height;
+        for (i = 0; i < maxId; i++) all_marks[i] = [];
         for (const teamId in marks) {
             let colour = teamColours[teamId];
             for (const marked of marks[teamId]) {
-                if (all_marks[marked] == undefined) {
-                    all_marks[marked] = [colour];
-                } else {
-                    all_marks[marked] += colour;
-                }
+                all_marks[marked].push(colour);
             }
         }
-        for (const goalId in all_marks) {
-            const cell = document.getElementById("cell"+ goalId); // TODO: actually use blocks for this
-            cell.setAttribute("style", "background-color: " + all_marks[goalId][0] + ";");
+
+        // We have to loop over all ids in case some goal was unmarked.
+        for (cellId = 0; cellId < maxId; cellId++) {
+            updateCellMarkings(cellId, all_marks[cellId]);
         }
     }
-    
 }
 
 function closeTeamDialog() {
@@ -139,6 +316,14 @@ function noPropagate(event) {
 
 function createTeamDialog() {
     teamDialog.showModal();
+}
+
+function onCellHoverChanged(id) {
+    function func(event) {
+        updateCellMarkings(lastHover, null);
+        updateCellMarkings(id, null);
+    }
+    return func;
 }
 
 function createTeam() {
@@ -155,13 +340,11 @@ function joinTeam(el) {
     JOIN_TEAM(roomId, teamid);
 }
 
-function markGoal(event) {
-    let cell = event.target;
-    if (event.target.className == "bingo-cell-content") {
-        cell = event.target.parentElement;
+function markGoal(index) {
+    function handleEvent(event) {
+        MARK(roomId, `${index}`);
     }
-    const id = cell.id.replace("cell", "");
-    MARK(roomId, id);
+    return handleEvent;
 }
 
 websocket.addEventListener("open", getBoard);
