@@ -361,14 +361,14 @@ window.addEventListener("JOINED", (data) => {
     document.getElementById("login-main").hidden = true;
     setTitle(event.roomName);
     createBoard(event.boardMin);
-    fillBoard(event.boardMin, event.teamColours, null);
+    fillBoard(event.boardMin, event.teamColours);
 });
 
 window.addEventListener("REJOINED", (data) => {
     const event = data.detail;
     setTitle(event.roomName);
     createBoard(event.boardMin);
-    fillBoard(event.boardMin, event.teamColours, null);
+    fillBoard(event.boardMin, event.teamColours);
 });
 
 window.addEventListener("MEMBERS", (data) => {
@@ -399,18 +399,18 @@ window.addEventListener("MEMBERS", (data) => {
 window.addEventListener("TEAM_JOINED", (data) => {
     const event = data.detail;
     createBoard(event.board);
-    fillBoard(event.board, event.teamColours, null);
+    fillBoard(event.board, event.teamColours);
 });
 
 window.addEventListener("TEAM_CREATED", (data) => {
     const event = data.detail;
     createBoard(event.board);
-    fillBoard(event.board, event.teamColours, null);
+    fillBoard(event.board, event.teamColours);
 });
 
 window.addEventListener("UPDATE", (data) => {
     const event = data.detail;
-    fillBoard(event.board, event.teamColours, null);
+    fillBoard(event.board, event.teamColours);
 });
 
 window.addEventListener("NOAUTH", (data) => {
