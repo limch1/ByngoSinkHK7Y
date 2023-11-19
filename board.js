@@ -3,7 +3,10 @@ const roomId = urlParams.get("id");
 const userId = Cookies.get(roomId);
 var teamDialog = null;
 var boardDims = null;
+
 const areaSkew = 0.7;
+const hoverColour = "#616161";
+const hoverPct = 0.4;
 
 window.addEventListener("DOMContentLoaded", () => {
     teamDialog = document.getElementById("teamDialog");
@@ -93,6 +96,8 @@ function createBoard(boardMin) {
             let index = (y - 1) * width + x - 1
             let cell = create_with_class("td", "bingo-cell");
             cell.id = "cell" + index;
+            cell.addEventListener("mouseover", onEnterCell(index));
+            cell.addEventListener("mouseleave", onExitCell(index));
             let svgDiv = create_with_class("div", "svg-container");
             let svg = create_svg("svg");
             svg.id = "cell-bg" + index;
@@ -175,7 +180,20 @@ function pointPrinter(width, height) {
     return scaler;
 }
 
-function buildSvgShapes(colours, svg, cell) {
+function getRGB(colour) {
+    return [parseInt(colour.substring(1, 3), 16), parseInt(colour.substring(3, 5), 16), parseInt(colour.substring(5, 7), 16)];
+}
+
+function interpolate(colour1, colour2, pct) {
+    var [r1, g1, b1] = getRGB(colour1);
+    var [r2, g2, b2] = getRGB(colour2);
+    const r = Math.round(r1 + (r2 - r1) * pct);
+    const g = Math.round(g1 + (g2 - g1) * pct);
+    const b = Math.round(b1 + (b2 - b1) * pct);
+    return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+}
+
+function buildSvgShapes(colours, svg, cell, hover) {
     if (colours.length == 0) {
         svg.width = 0;
         svg.height = 0;
@@ -189,18 +207,24 @@ function buildSvgShapes(colours, svg, cell) {
     svg.setAttribute('height', `${height}`);
 
     polygons = computePolygons(colours.length);
-    nodes = [];
     for (i = 0; i < polygons.length; i++) {
         node = create_svg("polygon");
         node.setAttribute('points', polygons[i].map(pointPrinter(width, height)).join(' '));
-        // TODO: make hover work with SVG colors
-        node.style = `fill:${colours[i]};stroke:black;stroke-width:1`;
+        let colour = colours[i];
+        if (hover) colour = interpolate(colour, hoverColour, hoverPct);
+        node.style = `fill:${colour};stroke:black;stroke-width:1`;
         svg.appendChild(node);
     }
-    return nodes;
 }
 
+var prevBoardData = null;
+var prevTeamColours = null;
+
 function fillBoard(boardData, teamColours) {
+    // Update local state.
+    boardData = boardData || prevBoardData;
+    teamColours = teamColours || prevTeamColours;
+
     let goals = boardData.goals;
     let marks = boardData.marks;
     if (goals != undefined) {
@@ -208,6 +232,7 @@ function fillBoard(boardData, teamColours) {
             let goal = goals[i];
             const textDiv = document.getElementById("cell-text" + i);
             const node = document.createTextNode(goal.name);
+            // TODO: Only update things that have changed.
             textDiv.replaceChildren(node);
             fitText(textDiv, 0.7);
 
@@ -231,9 +256,14 @@ function fillBoard(boardData, teamColours) {
             const cell = document.getElementById("cell" + cellId);
             let svg = document.getElementById("cell-bg" + cellId);
             svg.replaceChildren([]);
-            buildSvgShapes(all_marks[cellId], svg, cell);
+
+            // TODO: Only update things that have changed.
+            buildSvgShapes(all_marks[cellId], svg, cell, cell.matches(':hover'));
         }
     }
+
+    prevBoardData = boardData;
+    prevTeamColours = teamColours;
 }
 
 function closeTeamDialog() {
@@ -246,6 +276,20 @@ function noPropagate(event) {
 
 function createTeamDialog() {
     teamDialog.showModal();
+}
+
+function onEnterCell(id) {
+    function func(event) {
+        fillBoard(null, null);
+    }
+    return func;
+}
+
+function onExitCell(id) {
+    function func(event) {
+        fillBoard(null, null);
+    }
+    return func;
 }
 
 function createTeam() {
@@ -283,14 +327,14 @@ window.addEventListener("JOINED", (data) => {
     document.getElementById("login-main").hidden = true;
     setTitle(event.roomName);
     createBoard(event.boardMin);
-    fillBoard(event.boardMin, event.teamColours);
+    fillBoard(event.boardMin, event.teamColours, null);
 });
 
 window.addEventListener("REJOINED", (data) => {
     const event = data.detail;
     setTitle(event.roomName);
     createBoard(event.boardMin);
-    fillBoard(event.boardMin, event.teamColours);
+    fillBoard(event.boardMin, event.teamColours, null);
 });
 
 window.addEventListener("MEMBERS", (data) => {
@@ -321,18 +365,18 @@ window.addEventListener("MEMBERS", (data) => {
 window.addEventListener("TEAM_JOINED", (data) => {
     const event = data.detail;
     createBoard(event.board);
-    fillBoard(event.board, event.teamColours);
+    fillBoard(event.board, event.teamColours, null);
 });
 
 window.addEventListener("TEAM_CREATED", (data) => {
     const event = data.detail;
     createBoard(event.board);
-    fillBoard(event.board, event.teamColours);
+    fillBoard(event.board, event.teamColours, null);
 });
 
 window.addEventListener("UPDATE", (data) => {
     const event = data.detail;
-    fillBoard(event.board, event.teamColours);
+    fillBoard(event.board, event.teamColours, null);
 });
 
 window.addEventListener("NOAUTH", (data) => {
