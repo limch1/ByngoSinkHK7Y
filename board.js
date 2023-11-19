@@ -3,6 +3,7 @@ const roomId = urlParams.get("id");
 const userId = Cookies.get(roomId);
 var teamDialog = null;
 var boardDims = null;
+const areaSkew = 0.7;
 
 window.addEventListener("DOMContentLoaded", () => {
     teamDialog = document.getElementById("teamDialog");
@@ -107,14 +108,22 @@ function createBoard(boardMin) {
     boardDims = boardMin;
 }
 
+function skew(frac) {
+    return Math.pow(frac, areaSkew);
+}
+
+function reverseSkew(frac) {
+    return 1 - skew(1 - frac);
+}
+
 function topPoint(pct) {
-    if (pct <= 0.5) return [pct / 0.5, 0];
-    else return [1, (pct - 0.5) / 0.5];
+    if (pct <= 0.5) return [skew(pct / 0.5), 0];
+    else return [1, reverseSkew((pct - 0.5) / 0.5)];
 }
 
 function botPoint(pct) {
-    if (pct <= 0.5) return [0, pct / 0.5];
-    else return [(pct - 0.5) / 0.5, 1];
+    if (pct <= 0.5) return [0, skew(pct / 0.5)];
+    else return [reverseSkew((pct - 0.5) / 0.5), 1];
 }
 
 function computePolygon(startPct, endPct) {
