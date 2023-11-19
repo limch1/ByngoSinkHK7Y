@@ -304,9 +304,6 @@ function fillBoard(boardData, teamColours) {
             updateCellMarkings(cellId, all_marks[cellId]);
         }
     }
-
-    prevBoardData = boardData;
-    prevTeamColours = teamColours;
 }
 
 function closeTeamDialog() {
