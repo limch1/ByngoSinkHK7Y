@@ -1,6 +1,7 @@
 var urlParams = new URLSearchParams(window.location.search);
 const roomId = urlParams.get("id");
 const userId = Cookies.get(roomId);
+var currentTeamId = null;
 var teamDialog = null;
 var cellStates = {};
 var lastHover = -1;
@@ -30,6 +31,14 @@ class CellState {
         if (this.marked !== newMarked) {
             this.marked = newMarked;
             return true;
+        }
+        return false;
+    }
+
+    isMarkedFor(teamId) {
+        console.log("teamId: " + teamId + "; " + this.marked)
+        for (var marking of this.marked) {
+            if (marking[0] == teamId) return true;
         }
         return false;
     }
@@ -226,8 +235,8 @@ function interpolate(colour1, colour2, pct) {
     return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 }
 
-function buildSvgShapes(cell, svg, colours, hover) {
-    if (colours.length == 0) {
+function buildSvgShapes(cell, svg, markings, hover) {
+    if (markings.length == 0) {
         svg.width = 0;
         svg.height = 0;
         return;
@@ -239,18 +248,18 @@ function buildSvgShapes(cell, svg, colours, hover) {
     svg.setAttribute('width', `${width}`);
     svg.setAttribute('height', `${height}`);
 
-    polygons = computePolygons(colours.length);
+    polygons = computePolygons(markings.length);
     for (i = 0; i < polygons.length; i++) {
         node = create_svg("polygon");
         node.setAttribute('points', polygons[i].map(pointPrinter(width, height)).join(' '));
-        let colour = colours[i];
+        let colour = markings[i][1];
         if (hover) colour = interpolate(colour, hoverColour, hoverPct);
         node.style = `fill:${colour};stroke:black;stroke-width:1`;
         svg.appendChild(node);
     }
 }
 
-function updateCellMarkings(index, teamColours) {
+function updateCellMarkings(index, teamMarkings) {
     if (index == -1) return;
 
     const cell = document.getElementById("cell" + index);
@@ -259,7 +268,7 @@ function updateCellMarkings(index, teamColours) {
     let updated = false;
 
     let state = cellStates[index];
-    if (teamColours != undefined && state.updateMarked(teamColours)) updated = true;
+    if (teamMarkings != null && state.updateMarked(teamMarkings)) updated = true;
     if (state.updateHover(newHover)) updated = true;
     if (!updated) return;
 
@@ -284,7 +293,7 @@ function fillBoard(boardData, teamColours) {
 
                 // TODO: Separate revelation from markability (for Invasion)
                 const cell = document.getElementById("cell" + i);
-                cell.onclick = markGoal(i);
+                cell.onclick = markOrUnmarkGoal(i);
             }
         }
     }
@@ -295,7 +304,7 @@ function fillBoard(boardData, teamColours) {
         for (const teamId in marks) {
             let colour = teamColours[teamId];
             for (const marked of marks[teamId]) {
-                all_marks[marked].push(colour);
+                all_marks[marked].push([teamId, colour]);
             }
         }
 
@@ -340,9 +349,14 @@ function joinTeam(el) {
     JOIN_TEAM(roomId, teamid);
 }
 
-function markGoal(index) {
+function markOrUnmarkGoal(index) {
     function handleEvent(event) {
-        MARK(roomId, `${index}`);
+        let state = cellStates[index];
+        if (state.isMarkedFor(currentTeamId)) {
+            UNMARK(roomId, `${index}`)
+        } else {
+            MARK(roomId, `${index}`)
+        }
     }
     return handleEvent;
 }
@@ -356,6 +370,7 @@ window.addEventListener("NOTFOUND", (data) => {
 
 window.addEventListener("JOINED", (data) => {
     const event = data.detail;
+    currentTeamId = null;
     Cookies.set(roomId, event.userId, {sameSite: "strict"});
     document.getElementById("room").hidden = false;
     document.getElementById("login-main").hidden = true;
@@ -366,6 +381,7 @@ window.addEventListener("JOINED", (data) => {
 
 window.addEventListener("REJOINED", (data) => {
     const event = data.detail;
+    currentTeamId = event.teamId;
     setTitle(event.roomName);
     createBoard(event.boardMin);
     fillBoard(event.boardMin, event.teamColours);
@@ -398,14 +414,20 @@ window.addEventListener("MEMBERS", (data) => {
 
 window.addEventListener("TEAM_JOINED", (data) => {
     const event = data.detail;
+    currentTeamId = event.teamId;
     createBoard(event.board);
     fillBoard(event.board, event.teamColours);
 });
 
 window.addEventListener("TEAM_CREATED", (data) => {
     const event = data.detail;
+    currentTeamId = event.teamId;
     createBoard(event.board);
     fillBoard(event.board, event.teamColours);
+});
+
+window.addEventListener("TEAM_LEFT", (data) => {
+    currentTeamId = null;
 });
 
 window.addEventListener("UPDATE", (data) => {

@@ -100,3 +100,11 @@ function MARK(roomId, goalId) {
         goalId: goalId
     });
 }
+
+function UNMARK(roomId, goalId) {
+    send({
+        verb: "UNMARK",
+        roomId: roomId,
+        goalId: goalId
+    });
+}
