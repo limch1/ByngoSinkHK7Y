@@ -6,10 +6,19 @@ var teamDialog = null;
 var cellStates = {};
 var lastHover = -1;
 
+const cellBgColor = "#181818";
+const hoverColour = "#616161";
+const hoverPct = 0.5;
+const activePct = 0.5;
+const activePolygonPct = Math.sqrt(activePct);
+const svgXOffset = 4;
+const svgYOffset = 0;
+
 class CellState {
     goal = "";
     hover = false;
     marked = [];
+    activeTeamId = null;
 
     updateGoal(newGoal) {
         if (this.goal != newGoal) {
@@ -35,18 +44,37 @@ class CellState {
         return false;
     }
 
+    updateActiveTeamId(newActiveTeamId) {
+        if (this.activeTeamId == newActiveTeamId) return false;
+        var prevId = this.activeTeamId;
+        this.activeTeamId = newActiveTeamId;
+
+        for (var marking of this.marked) {
+            if (marking[0] == newActiveTeamId || marking[0] == prevId) return true;
+        }
+        return false;
+    }
+
     isMarkedFor(teamId) {
-        console.log("teamId: " + teamId + "; " + this.marked)
+        if (teamId == null) return false;
         for (var marking of this.marked) {
             if (marking[0] == teamId) return true;
         }
         return false;
     }
-}
 
-const areaSkew = 0.7;
-const hoverColour = "#616161";
-const hoverPct = 0.5;
+    getColourFor(teamId) {
+        for (var marking of this.marked) {
+            if (marking[0] == teamId) return marking[1];
+        }
+        return null;
+    }
+
+    isFull() {
+        // TODO: Fill the cell if the goal cannot be claimed by anyone else (lockout formats)
+        return false;
+    }
+}
 
 window.addEventListener("DOMContentLoaded", () => {
     teamDialog = document.getElementById("teamDialog");
@@ -152,66 +180,6 @@ function createBoard(boardMin) {
         }
         table.appendChild(row);
     }
-    boardDims = boardMin;
-}
-
-function skew(frac) {
-    return Math.pow(frac, areaSkew);
-}
-
-function reverseSkew(frac) {
-    return 1 - skew(1 - frac);
-}
-
-function topPoint(pct) {
-    if (pct <= 0.5) return [skew(pct / 0.5), 0];
-    else return [1, reverseSkew((pct - 0.5) / 0.5)];
-}
-
-function botPoint(pct) {
-    if (pct <= 0.5) return [0, skew(pct / 0.5)];
-    else return [reverseSkew((pct - 0.5) / 0.5), 1];
-}
-
-function computePolygon(startPct, endPct) {
-    const points = []
-    if (startPct > 0) {
-        points.push(topPoint(startPct));
-    } else {
-        points.push([0, 0])
-    }
-    if (startPct < 0.5 && endPct > 0.5) {
-        points.push([1, 0]);
-    }
-    if (endPct < 1) {
-        points.push(topPoint(endPct));
-        points.push(botPoint(endPct));
-    } else {
-        points.push([1, 1]);
-    }
-    if (startPct < 0.5 && endPct > 0.5) {
-        points.push([0, 1]);
-    }
-    if (startPct > 0) {
-        points.push(botPoint(startPct));
-    }
-
-    return points;
-}
-
-function computePolygons(count) {
-    pcts = [0];
-    for (i = 1; i < count; i++) {
-        // TODO: Use non-linear distribution for better area sharing
-        pcts.push(i * 1.0 / count);
-    }
-    pcts.push(1);
-
-    polygons = [];
-    for (i = 0; i < pcts.length - 1; i++) {
-        polygons.push(computePolygon(pcts[i], pcts[i + 1]));
-    }
-    return polygons;
 }
 
 function pointPrinter(width, height) {
@@ -235,27 +203,133 @@ function interpolate(colour1, colour2, pct) {
     return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 }
 
-function buildSvgShapes(cell, svg, markings, hover) {
-    if (markings.length == 0) {
+const squarePolygon = [[0, 0], [1, 0], [1, 1], [0, 1]];
+const activePolygon = [[0, activePolygonPct], [activePolygonPct, 0], [1, 0], [1, 1 - activePolygonPct], [1 - activePolygonPct, 1], [0, 1]];
+
+function renderPolygon(svg, width, height, polygon, colour, hover) {
+    let node = create_svg("polygon");
+    node.setAttribute('points', polygon.map(pointPrinter(width, height)).join(' '));
+    if (hover) colour = interpolate(colour, hoverColour, hoverPct);
+    node.style = `fill:${colour};stroke:black;stroke-width:1`;
+    svg.appendChild(node);
+}
+
+function skew(frac) {
+    return Math.pow(frac, areaSkew);
+}
+
+function reverseSkew(frac) {
+    return 1 - skew(1 - frac);
+}
+
+function topLeftPoint(pct) {
+    if (pct <= 1) return [0, 1 - pct];
+    else return [pct - 1, 0];
+}
+
+function bottomRightPoint(pct) {
+    if (pct <= 1) return [pct, 1];
+    else return [1, 2 - pct];
+}
+
+// Given a triangle with sides |size|, |size|, and |size| * sqrt(2), divide it evenly into N sections perpendicular to the hypotenuse.
+// Results are coordinates along the hypotenuse, scaled to [0, 2*size]
+function splitTriangle(size, sections) {
+    let totalArea = size * size / 2.0;
+    let share = totalArea / sections;
+
+    let splits = [];
+    let currentShare = 0;
+    let half = ((sections % 2 == 0) ? (sections - 2) : (sections - 1)) / 2;
+    for (i = 0; i < half; i++) {
+        currentShare += share;
+
+        // x^2/2 = currentShare; x = sqrt(2 * currentShare)
+        // dist = sqrt(2) * x; dist = 2 * sqrt(currentShare)
+        splits.push(2 * Math.sqrt(currentShare));
+    }
+
+    if (sections % 2 == 0) splits.push(size);
+    for (i = 0; i < half; i++) splits.push(2 * size - splits[half - 1 - i]);
+    return splits;
+}
+
+function computeCrossPolygon(startPct, endPct) {
+    const points = []
+    if (startPct > 0) {
+        points.push(bottomRightPoint(startPct));
+        points.push(topLeftPoint(startPct));
+    } else {
+        points.push([0, 1]);
+    }
+    if (startPct < 1 && endPct > 1) {
+        points.push([0, 0]);
+    }
+    if (endPct < 2) {
+        points.push(topLeftPoint(endPct));
+        points.push(bottomRightPoint(endPct));
+    } else {
+        points.push([1, 0]);
+    }
+    if (startPct < 1 && endPct > 1) {
+        points.push([1, 1]);
+    }
+
+    return points;
+}
+
+function renderCrossPolygons(svg, width, height, markings, hover, leaveGap) {
+    if (markings.length == 0) return;
+
+    let pcts = [];
+    if (leaveGap) {
+        pcts.push(1 - activePolygonPct);
+        for (var split of splitTriangle(activePolygonPct, markings.length)) {
+            pcts.push(1 - activePolygonPct + split);
+        }
+        pcts.push(1 + activePolygonPct);
+    } else {
+        pcts.push(0);
+        pcts.push(...splitTriangle(1, markings.length));
+        pcts.push(2);
+    }
+
+    console.log("pcts: " + pcts + "; " + markings.length);
+    for (i = 0; i + 1 < pcts.length; i++) {
+        let polygon = computeCrossPolygon(pcts[i], pcts[i + 1]);
+        renderPolygon(svg, width, height, polygon, markings[i][1], hover);
+    }
+}
+
+function buildSvgShapes(cell, svg, state) {
+    if (state.marked.length == 0) {
         svg.width = 0;
         svg.height = 0;
         return;
     }
 
     let rect = cell.getBoundingClientRect();
-    let width = Math.trunc(rect.right - rect.left) + 4;
-    let height = Math.trunc(rect.bottom - rect.top);
+    let width = Math.trunc(rect.right - rect.left) + svgXOffset;
+    let height = Math.trunc(rect.bottom - rect.top) + svgYOffset;
     svg.setAttribute('width', `${width}`);
     svg.setAttribute('height', `${height}`);
 
-    polygons = computePolygons(markings.length);
-    for (i = 0; i < polygons.length; i++) {
-        node = create_svg("polygon");
-        node.setAttribute('points', polygons[i].map(pointPrinter(width, height)).join(' '));
-        let colour = markings[i][1];
-        if (hover) colour = interpolate(colour, hoverColour, hoverPct);
-        node.style = `fill:${colour};stroke:black;stroke-width:1`;
-        svg.appendChild(node);
+    if (state.marked.length == 1 && state.isFull()) {
+       renderPolygon(svg, width, height, squarePolygon, state.marked[0][1], state.hover);
+       return;
+    }
+
+    if (!state.isFull() || state.isMarkedFor(currentTeamId)) {
+        let filtered = [];
+        for (var marking of state.marked) {
+            if (marking[0] != currentTeamId) {
+                filtered.push(marking);
+            }
+        }
+        renderCrossPolygons(svg, width, height, filtered, state.hover, true);
+        renderPolygon(svg, width, height, activePolygon, state.isMarkedFor(currentTeamId) ? state.getColourFor(currentTeamId) : cellBgColor, state.hover);
+    } else {
+        renderCrossPolygons(svg, width, height, state.marked, state.hover, false);
     }
 }
 
@@ -269,12 +343,21 @@ function updateCellMarkings(index, teamMarkings) {
 
     let state = cellStates[index];
     if (teamMarkings != null && state.updateMarked(teamMarkings)) updated = true;
+    if (state.updateActiveTeamId(currentTeamId)) updated = true;
     if (state.updateHover(newHover)) updated = true;
     if (!updated) return;
 
     const svg = document.getElementById("cell-bg" + index);
     svg.replaceChildren([]);
-    buildSvgShapes(cell, svg, state.marked, state.hover);
+    buildSvgShapes(cell, svg, state);
+}
+
+function updateCurrentTeamId(newTeamId) {
+    currentTeamId = newTeamId;
+
+    for (const cellId in cellStates) {
+        updateCellMarkings(cellId, null);
+    }
 }
 
 function fillBoard(boardData, teamColours) {
@@ -299,8 +382,9 @@ function fillBoard(boardData, teamColours) {
     }
     if (marks != undefined && teamColours != undefined) {
         var all_marks = {};
-        let maxId = boardDims.width * boardDims.height;
-        for (i = 0; i < maxId; i++) all_marks[i] = [];
+        for (const cellId in cellStates) {
+            all_marks[cellId] = [];
+        }
         for (const teamId in marks) {
             let colour = teamColours[teamId];
             for (const marked of marks[teamId]) {
@@ -309,7 +393,7 @@ function fillBoard(boardData, teamColours) {
         }
 
         // We have to loop over all ids in case some goal was unmarked.
-        for (cellId = 0; cellId < maxId; cellId++) {
+        for (const cellId in cellStates) {
             updateCellMarkings(cellId, all_marks[cellId]);
         }
     }
@@ -370,7 +454,7 @@ window.addEventListener("NOTFOUND", (data) => {
 
 window.addEventListener("JOINED", (data) => {
     const event = data.detail;
-    currentTeamId = null;
+    updateCurrentTeamId(null);
     Cookies.set(roomId, event.userId, {sameSite: "strict"});
     document.getElementById("room").hidden = false;
     document.getElementById("login-main").hidden = true;
@@ -381,7 +465,7 @@ window.addEventListener("JOINED", (data) => {
 
 window.addEventListener("REJOINED", (data) => {
     const event = data.detail;
-    currentTeamId = event.teamId;
+    updateCurrentTeamId(event.teamId);
     setTitle(event.roomName);
     createBoard(event.boardMin);
     fillBoard(event.boardMin, event.teamColours);
@@ -414,20 +498,20 @@ window.addEventListener("MEMBERS", (data) => {
 
 window.addEventListener("TEAM_JOINED", (data) => {
     const event = data.detail;
-    currentTeamId = event.teamId;
+    updateCurrentTeamId(event.teamId);
     createBoard(event.board);
     fillBoard(event.board, event.teamColours);
 });
 
 window.addEventListener("TEAM_CREATED", (data) => {
     const event = data.detail;
-    currentTeamId = event.teamId;
+    updateCurrentTeamId(event.teamId);
     createBoard(event.board);
     fillBoard(event.board, event.teamColours);
 });
 
 window.addEventListener("TEAM_LEFT", (data) => {
-    currentTeamId = null;
+    updateCurrentTeamId(null);
 });
 
 window.addEventListener("UPDATE", (data) => {
