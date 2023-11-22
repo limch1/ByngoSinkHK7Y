@@ -72,6 +72,10 @@ class CellState {
 
     isFull() {
         // TODO: Fill the cell if the goal cannot be claimed by anyone else (lockout formats)
+        // Otherwise, fill if self is only mark
+        if (this.marked.length == 1 && this.marked[0][0] == this.activeTeamId) {
+            return true;
+        }
         return false;
     }
 }
