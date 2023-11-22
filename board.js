@@ -176,6 +176,7 @@ function createBoard(boardMin) {
             let textDiv = create_with_class("div", "bingo-cell-content");
             textDiv.id = "cell-text" + index
             cell.appendChild(textDiv);
+            cell.appendChild(create_with_class("div", "bingo-shadow"))
             row.appendChild(cell);
         }
         table.appendChild(row);

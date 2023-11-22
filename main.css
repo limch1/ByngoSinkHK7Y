@@ -15,7 +15,7 @@ body {
 
 .window-header {
     background-color: #3e444c !important;
-    display:block !important;
+    display:flex !important;
     width:100% !important;
     padding: 0.6em 1em;
     border-bottom: 0.1em solid black;
