@@ -10,7 +10,7 @@ websocket.addEventListener("open", () => {
 
 function setLargeBoards() {
     let genDropdown = document.getElementById("generator");
-    let bool = genDropdown.options[genDropdown.selectedIndex].classList.contains("small");
+    let bool = genDropdown.options[genDropdown.selectedIndex].classList.contains("small_gen");
     for (const opt of document.getElementById("board").getElementsByClassName("large")) {
         opt.disabled = bool;
     }
@@ -39,7 +39,7 @@ window.addEventListener("GENERATORS", (data) => {
     genSelect.innerHTML = "";
     for (const gen of gens) {
         let opt = new Option(gen.name, gen.name);
-        if (gen.small) { opt.classList.add("small"); }
+        if (gen.count < 169) { opt.classList.add("small_gen"); }
         genSelect.add(opt);
     }
     if (gens.length == 1) { genSelect.disabled = true; } 
