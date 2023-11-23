@@ -175,6 +175,8 @@ function createBoard(boardMin) {
             let svgDiv = create_with_class("div", "svg-container");
             let svg = create_svg("svg");
             svg.id = "cell-bg" + index;
+            svg.setAttribute("viewBox", "0 0 100 100");
+            svg.setAttribute("preserveAspectRatio", "none");
             svgDiv.appendChild(svg);
             cell.appendChild(svgDiv);
             let textDiv = create_with_class("div", "bingo-cell-content");
@@ -320,7 +322,7 @@ function buildSvgShapes(cell, svg, state) {
     svg.setAttribute('height', `${height}`);
 
     if (state.marked.length == 1 && state.isFull()) {
-       renderPolygon(svg, width, height, squarePolygon, state.marked[0][1], state.hover);
+       renderPolygon(svg, 100, 100, squarePolygon, state.marked[0][1], state.hover);
        return;
     }
 
@@ -331,10 +333,10 @@ function buildSvgShapes(cell, svg, state) {
                 filtered.push(marking);
             }
         }
-        renderCrossPolygons(svg, width, height, filtered, state.hover, true);
-        renderPolygon(svg, width, height, activePolygon, state.isMarkedFor(currentTeamId) ? state.getColourFor(currentTeamId) : cellBgColor, state.hover);
+        renderCrossPolygons(svg, 100, 100, filtered, state.hover, true);
+        renderPolygon(svg, 100, 100, activePolygon, state.isMarkedFor(currentTeamId) ? state.getColourFor(currentTeamId) : cellBgColor, state.hover);
     } else {
-        renderCrossPolygons(svg, width, height, state.marked, state.hover, false);
+        renderCrossPolygons(svg, 100, 100, state.marked, state.hover, false);
     }
 }
 
