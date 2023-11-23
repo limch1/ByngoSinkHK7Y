@@ -108,3 +108,10 @@ function UNMARK(roomId, goalId) {
         goalId: goalId
     });
 }
+
+function SPECTATE(roomId) {
+    send({
+        verb: "SPECTATE",
+        roomId: roomId
+    });
+}

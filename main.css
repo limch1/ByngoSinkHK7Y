@@ -22,6 +22,7 @@ body {
     border-radius: 0.25em;
     border-bottom-right-radius: 0em;
     border-bottom-left-radius: 0em;
+    justify-content: space-between;
 }
 
 .flex {

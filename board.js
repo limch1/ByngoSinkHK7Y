@@ -450,6 +450,10 @@ function markOrUnmarkGoal(index) {
     return handleEvent;
 }
 
+function spectate() {
+    SPECTATE(roomId);
+}
+
 websocket.addEventListener("open", getBoard);
 
 // Websocket listeners
