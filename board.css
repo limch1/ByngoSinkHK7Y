@@ -217,12 +217,6 @@ h2 {
 }
 
 @media screen and (max-width: 800px) {
-    main {
-        flex-direction: column;
-        flex-wrap: wrap;
-        justify-content:flex-end;
-    }
-
     footer {
         justify-content: center;
     }
