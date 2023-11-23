@@ -456,6 +456,60 @@ function spectate() {
     SPECTATE(roomId);
 }
 
+const emojinums = {
+    0: "0️⃣",
+    1: "1️⃣",
+    2: "2️⃣",
+    3: "3️⃣",
+    4: "4️⃣",
+    5: "5️⃣",
+    6: "6️⃣",
+    7: "7️⃣",
+    8: "8️⃣",
+    9: "9️⃣"
+}
+
+function copyResults() {
+    let boardWidth = currentUpdate.board.width;
+    let boardHeight = currentUpdate.board.height;
+    let outerArray = new Array();
+
+    for (let i = 0; i < boardWidth; i++){
+        outerArray[i] = new Array(boardHeight).fill("⬜")
+    }
+    // let innerArray = Array(boardWidth).fill("⬛");
+    // let outerArray = Array(boardHeight).fill(innerArray);
+    console.log(outerArray);
+    for (var mark of currentUpdate.board.marks[currentTeamId]) {
+        let outer = Math.floor(mark / boardWidth);
+        let inner = mark % boardWidth;
+        outerArray[outer][inner] = "🟩";
+    }
+    let finalString = "||Generated on https://byngosink.manicjamie.com/\n#️⃣";
+    for (let i = 1; i < boardWidth+1; i++){
+        if (i < 10) {
+            finalString += emojinums[i];
+        } else {
+            finalString += emojinums[i-10];
+        }
+    }
+    finalString += "\n";
+    for (let i = 0; i < boardHeight; i++){
+        let text = outerArray[i].join("");
+        if (i < 9) {
+            finalString += emojinums[i+1];
+        } else {
+            console.log(i-10);
+            finalString += emojinums[i-9];
+        }
+        finalString += text;
+        finalString += "\n";
+    }
+    finalString += "||";
+    console.log(finalString);
+    navigator.clipboard.writeText(finalString);
+}
+
 websocket.addEventListener("open", getBoard);
 
 // Websocket listeners
@@ -525,8 +579,11 @@ window.addEventListener("TEAM_LEFT", (data) => {
     updateCurrentTeamId(null);
 });
 
+var currentUpdate = null; 
+
 window.addEventListener("UPDATE", (data) => {
     const event = data.detail;
+    currentUpdate = event;
     fillBoard(event.board, event.teamColours);
 });
 
