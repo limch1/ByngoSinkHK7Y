@@ -11,6 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.min.js" integrity="sha512-B4skI5FiLurS86aioJx9VfozI1wjqrn6aTdJH+YQUmCZum/ZibPBTX55k5d9XM6EsKePDInkLVrN7vPmJxc1qA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css"/>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
     <script src="lib/fittext.js"></script>
     <script src='main.js'></script>
@@ -25,15 +26,18 @@
             </div>
             <div id="sidebar">
                 <header class="rounded bordered" style="width: 100%">
-                    <h1>ByngoSink: </h1>
-                    <h2></h2>
-                </header>
-                <div id="teamSelector">
-                    <div class="window-header">
-                        <div>here is teams</div>
-                        <button id="teamDialogButton" onclick="createTeamDialog()">Add Team</button>
+                    <div id="titleBar">
+                        <h1>ByngoSink</h1>
+                        <button id="Exit" class="rounded" onclick="exit()">Exit Room</button>
                     </div>
-                    <div id="teamSelector-inner">
+                    <h2 id="roomNameLabel"></h2>
+                </header>
+                <div id="teamSelector" class="rounded bordered">
+                    <div class="window-header">
+                        <div>here is teams </div>
+                        <button id="teamDialogButton" class="rounded" onclick="createTeamDialog()">Add Team</button>
+                    </div>
+                    <div id="teamSelector-inner" class="rounded">
                     </div>
                     
                 </div>
@@ -43,33 +47,32 @@
                     </div>
                     <div id="chat-inner" class="rounded">
                         <div id="chat-box" class="bordered">
-                            <p class="chat-message">:3</p>
-                            <p class="chat-message">:3</p>
-                            <p class="chat-message">:3</p>
-                            <p class="chat-message">:3</p>
-                            <p class="chat-message">:3</p>
-                            <p class="chat-message">:3</p>
-                            <p class="chat-message">:3</p>
-                            <p class="chat-message">:3</p>
-                            <p class="chat-message">:3</p>
-                            <p class="chat-message">:3</p>
-                            <p class="chat-message">:3</p>
-                            <p class="chat-message">:3</p>
-                            <p class="chat-message">:3</p>
-                            <p class="chat-message">:3</p>
-                            <p class="chat-message">:3</p>
-                            <p class="chat-message">:3</p>
-                            <p class="chat-message">:3</p>
-                            <p class="chat-message">:3</p>
-                            <p class="chat-message">:3</p>
-                            <p class="chat-message">:3</p>
-                            <p class="chat-message">:3</p>
+                            <div class="chat-message">:3</div>
+                            <div class="chat-message">:3</div>
+                            <div class="chat-message">:3</div>
+                            <div class="chat-message">:3</div>
+                            <div class="chat-message">:3</div>
+                            <div class="chat-message">:3</div>
+                            <div class="chat-message">:3</div>
+                            <div class="chat-message">:3</div>
+                            <div class="chat-message">:3</div>
+                            <div class="chat-message">:3</div>
+                            <div class="chat-message">:3</div>
+                            <div class="chat-message">:3</div>
+                            <div class="chat-message">:3</div>
+                            <div class="chat-message">:3</div>
+                            <div class="chat-message">:3</div>
+                            <div class="chat-message">:3</div>
+                            <div class="chat-message">:3</div>
+                            <div class="chat-message">:3</div>
+                            <div class="chat-message">:3</div>
+                            <div class="chat-message">:3</div>
+                            <div class="chat-message">:3</div>
                         </div>
                         <input id="chat-message-box" class="bordered">
                     </div>
-
                 </div>
-                <button id="Exit" onclick="exit()">Exit Room</button>
+                
             </div>
             <dialog id="teamDialog" onclick="closeTeamDialog()">
                 <div id="teamDialog-wrapper" onclick="noPropagate(event)">
@@ -94,6 +97,15 @@
         <footer class="flex">
             <div id="ws-url-wrapper">
                 <input id="websocket-url" type="text" value="wss://byngosink-ws.manicjamie.com:555/">
+            </div>
+            <div>
+                Cell type: 
+                <select>
+                    <option>Cross-diagonal</option>
+                    <option disabled>Diagonal</option>
+                    <option disabled>Square (30%)</option>
+                    <option disabled>Square (50%)</option>
+                </select>
             </div>
             <div class="flex">github about</div>
         </footer>

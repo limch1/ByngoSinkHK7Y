@@ -132,7 +132,7 @@ function exit() {
 
 function setTitle(title) {
     document.title = title;
-    document.getElementsByTagName("h1")[0].innerText = "ByngoSink: " + title;
+    document.getElementsByTagName("h2")[0].innerText = title;
 }
 
 function create_with_class(type, cls) {

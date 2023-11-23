@@ -3,6 +3,39 @@ body {
     --cell-height: 1rem;
 }
 
+#container {
+    width: 100%;
+    max-width: none;
+    padding: 0.5rem;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    font-size: 2rem !important;
+    margin-top: 0.5rem !important;
+    margin-bottom: 0;
+    line-height: 1rem !important;
+    height: 2rem;
+}
+
+#Exit {
+    margin-left: auto;
+    color: #272b30;
+}
+
+h2 {
+    font-size: 1.25rem !important;
+    margin: 0rem !important;
+}
+
+#titleBar {
+    display: flex;
+}
+
 #board-container {
     aspect-ratio: 1.2 / 1;
     height: 55rem;
@@ -103,6 +136,7 @@ body {
 #teamDialogButton {
     border-radius: 0.25em;
     justify-self: end;
+    margin-left: auto;
 }
 
 #teamDialog {
@@ -129,28 +163,29 @@ body {
 }
 
 #sidebar {
+    flex-direction: column;
     display:flex;
     flex-grow: 1;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 1em;
     width: auto;
     max-width: 30rem;
     min-width: 20rem;
+    height: 55rem;
 }
 
 #chat-outer {
     width: 100%;
-}
-
-#chat-outer {
     display: flex;
     flex-direction: column;
-    height: fit-content;
+    flex: 3;
+    height:10rem;
 }
 
 #chat-inner {
     width: 100%;
-    height: 30em;
+    min-height: 5rem;
+    height:100%;
     background-color: #2e3338;
     display:flex;
     flex-direction: column;
@@ -163,7 +198,8 @@ body {
     text-wrap: wrap;
     background-color: #272b30;
     padding: 0.2rem;
-    
+    display:flex;
+    flex-direction: column-reverse;
 }
 
 #chat-message-box {
@@ -178,7 +214,7 @@ body {
 }
 
 .chat-message {
-    margin: 0.2rem;
+    margin: 0.1rem 0.2rem;
 }
 
 @media screen and (max-width: 800px) {
@@ -198,29 +234,21 @@ body {
     }
 }
 
-#container {
-    width: 100%;
-    max-width: none;
-    padding: 1vh;
-}
-
 #teamSelector {
     display: flex;
     flex-direction: column;
     min-width: 10em;
     width: 100%;
+    height:fit-content;
 }
 
 #teamSelector-inner {
     background-color: #2e3338;
     display:flex;
     flex-wrap: wrap;
+    min-height: 4rem;
 }
 
 .disconnected {
     color:#adadad
-}
-
-#exit {
-    flex: 2;
 }
