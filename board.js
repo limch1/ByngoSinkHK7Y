@@ -4,6 +4,7 @@ const userId = Cookies.get(roomId);
 var currentTeamId = null;
 var teamDialog = null;
 var cellStates = {};
+var headerStates = {};
 var lastHover = -1;
 
 const cellBgColor = "#181818";
@@ -156,7 +157,20 @@ function createBoard(boardMin) {
     headerRow.appendChild(corner);
     for (let x = 1; x <= width; x++) {
         let header = create_with_class("th", "bingo-col-header");
-        header.innerText = x;
+        let headerContainer = create_with_class("div", "header-container");
+        header.id = "header" + x;
+        headerStates[x] = new CellState();
+        let textDiv = create_with_class("div", "header-content");
+        textDiv.innerText = x;
+        headerContainer.appendChild(textDiv);
+        let svgDiv = create_with_class("div", "svg-container");
+        let svg = create_svg("svg");
+        svg.id = "header-bg" + x;
+        svg.setAttribute("viewBox", "0 0 100 100");
+        svg.setAttribute("preserveAspectRatio", "none");
+        svgDiv.appendChild(svg);
+        headerContainer.appendChild(svgDiv);
+        header.appendChild(headerContainer);
         headerRow.appendChild(header);
     }
     table.appendChild(headerRow);
@@ -301,7 +315,7 @@ function renderCrossPolygons(svg, width, height, markings, hover, leaveGap) {
         pcts.push(2);
     }
 
-    console.log("pcts: " + pcts + "; " + markings.length);
+    console.debug("pcts: " + pcts + "; " + markings.length);
     for (i = 0; i + 1 < pcts.length; i++) {
         let polygon = computeCrossPolygon(pcts[i], pcts[i + 1]);
         renderPolygon(svg, width, height, polygon, markings[i][1], hover);
@@ -359,6 +373,22 @@ function updateCellMarkings(index, teamMarkings) {
     buildSvgShapes(cell, svg, state);
 }
 
+function updateHeaderMarkings(index, teamMarkings) {
+    if (index == -1) return;
+
+    const header = document.getElementById("header" + index);
+    let updated = false;
+
+    let state = headerStates[index];
+    if (teamMarkings != null && state.updateMarked(teamMarkings)) updated = true;
+    if (state.updateActiveTeamId(currentTeamId)) updated = true;
+    if (!updated) return;
+
+    const svg = document.getElementById("header-bg" + index);
+    svg.replaceChildren([]);
+    buildSvgShapes(header, svg, state);
+}
+
 function updateCurrentTeamId(newTeamId) {
     currentTeamId = newTeamId;
 
@@ -371,6 +401,10 @@ function fillBoard(boardData, teamColours) {
     // Update local state.
     let goals = boardData.goals;
     let marks = boardData.marks;
+    let extras = boardData.extras;
+    if (extras != undefined) {
+        var headers = boardData.extras.colMarks;
+    }
     if (goals != undefined) {
         for (const i in goals) {
             let goal = goals[i];
@@ -402,6 +436,20 @@ function fillBoard(boardData, teamColours) {
         // We have to loop over all ids in case some goal was unmarked.
         for (const cellId in cellStates) {
             updateCellMarkings(cellId, all_marks[cellId]);
+        }
+    }
+    if (headers != undefined) {
+        var all_headings = {}
+        for (const headerId in headerStates) {
+            all_headings[headerId] = [];
+        }
+        for (const teamId in headers) {
+            let colour = teamColours[teamId];
+            let index = headers[teamId] + 1;
+            all_headings[index].push([teamId, colour]);
+        }
+        for (const headId in headerStates) {
+            updateHeaderMarkings(headId, all_headings[headId])
         }
     }
 }
