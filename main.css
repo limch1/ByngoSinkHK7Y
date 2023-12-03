@@ -113,6 +113,14 @@ footer {
     padding:1em;
 }
 
+#room-list-inner td {
+    padding-right: 0.5em;
+}
+
+#room-list-inner tbody tr:hover {
+    background-color: #3e444c;
+}
+
 #websocket-url {
     width: 100%;
 }

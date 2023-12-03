@@ -51,16 +51,31 @@ window.addEventListener("LISTED", (data) => {
     const event = data.detail;
     const roomList = document.getElementById("room-list-inner");
     roomList.innerHTML = "";
+    const table = roomList.appendChild(document.createElement("table"));
+    const tBody = table.createTBody();
+    table.createTHead();
+    const headerRow = table.tHead.insertRow();
+    headerRow.insertCell().textContent = "Room";
+    headerRow.insertCell().textContent = "Game";
+    headerRow.insertCell().textContent = "Variant";
+    headerRow.insertCell().textContent = "Board";
+    headerRow.insertCell().textContent = "Count";
     for (const [roomId, roomData] of Object.entries(event.list)) {
-        let row = document.createElement("p");
-        let link = document.createElement("a");
+        const row = tBody.insertRow();
+
+        const linkCell = row.insertCell();
+        const link = document.createElement("a");
         link.setAttribute("href", "board.html?id=" + roomId)
         let linkText = document.createTextNode(roomData.name);
         link.appendChild(linkText);
-        row.appendChild(link);
-        let textNode = document.createTextNode(" | " + roomData.game + " | " +  roomData.variant + " | " + roomData.board + " | " + roomData.count)
-        row.appendChild(textNode);
-        roomList.appendChild(row);
+        linkCell.appendChild(link);
+
+        row.insertCell().textContent = roomData.game;
+        row.insertCell().textContent = roomData.variant;
+        row.insertCell().textContent = roomData.board;
+        const countCell = row.insertCell()
+        countCell.textContent = roomData.count;
+        countCell.style = "text-align: end;"
     }
 });
 
