@@ -517,23 +517,78 @@ const emojinums = {
     9: "9️⃣"
 }
 
+const huenums = [0, 13, 40, 70, 164, 265];
+
+const huevalues = { //this array is ENTIRELY subjective based on my personal opinion of where hues start and end. there's probably a better way to do this.
+    0: "🟥",
+    13: "🟧",
+    40: "🟨",
+    70: "🟩",
+    164: "🟦",
+    265: "🟪"
+}
+
+function rgbToHsl(r, g, b){
+    r /= 255, g /= 255, b /= 255;
+    var max = Math.max(r, g, b), min = Math.min(r, g, b);
+    var h, s, l = (max + min) / 2;
+
+    if(max == min){
+        h = s = 0; // achromatic
+    }else{
+        var d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        switch(max){
+            case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+            case g: h = (b - r) / d + 2; break;
+            case b: h = (r - g) / d + 4; break;
+        }
+        h /= 6;
+    }
+
+    return [h, s, l];
+}
+
+function closestNum(num, arr) {
+    num = Math.floor(num);
+    console.log(num);
+    curr = arr[0];
+    for (var arrval of arr){
+        if (num - arrval > 0) {
+            if ((num - arrval) < (num - curr)){
+                curr = arrval;
+            }
+        }
+    }
+    return curr;
+}
+
 function copyResults() {
     let boardWidth = currentUpdate.board.width;
     let boardHeight = currentUpdate.board.height;
     let outerArray = new Array();
 
     for (let i = 0; i < boardWidth; i++){
-        outerArray[i] = new Array(boardHeight).fill("⬜")
+        outerArray[i] = new Array(boardHeight).fill("⬜");
     }
     // let innerArray = Array(boardWidth).fill("⬛");
     // let outerArray = Array(boardHeight).fill(innerArray);
-    console.log(outerArray);
+    
+    let teamColour = currentUpdate.teamColours[currentTeamId];
+    let r = parseInt(teamColour.substr(1,2), 16);
+    let g = parseInt(teamColour.substr(3,2), 16);
+    let b = parseInt(teamColour.substr(5,2), 16);
+
+    let hue = rgbToHsl(r, g, b)[0] * 360;
+    //console.log(huevalues[closestNum(hue, huenums)]);
+
+    emojiColour = huevalues[closestNum(hue, huenums)];
     for (var mark of currentUpdate.board.marks[currentTeamId]) {
         let outer = Math.floor(mark / boardWidth);
         let inner = mark % boardWidth;
-        outerArray[outer][inner] = "🟩";
+        outerArray[outer][inner] = emojiColour;
     }
-    let finalString = "||Generated on https://byngosink.manicjamie.com/\n#️⃣";
+    let finalString = "Generated on https://byngosink.manicjamie.com/\n||#️⃣";
     for (let i = 1; i < boardWidth+1; i++){
         if (i < 10) {
             finalString += emojinums[i];
