@@ -1,0 +1,1495 @@
+{
+    "goals": {
+        "3000": {
+            "name": "Spend 3000 geo",
+            "img1": "Geo.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "4000": {
+            "name": "Spend 4000 geo",
+            "img1": "Geo.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "5000": {
+            "name": "Spend 5000 geo",
+            "img1": "Geo.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "2DreamBosses": {
+            "name": "Defeat two Dream Bosses",
+            "img1": "Soul Master.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "BVessel": {
+            "name": "Defeat Broken Vessel",
+            "img1": "Broken Vessel.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "LostKin": {
+            "name": "Defeat Lost Kin",
+            "img1": "Broken Vessel.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "CG1": {
+            "name": "Defeat Crystal Guardian 1",
+            "img1": "Crystal Guardian.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "CG2": {
+            "name": "Defeat Crystal Guardian 2",
+            "img1": "Crystal Guardian.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Collector": {
+            "name": "Defeat Collector",
+            "img1": "Collector.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "DDefender": {
+            "name": "Defeat Dung Defender",
+            "img1": "Dung Defender.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "FChamp": {
+            "name": "Defeat Failed Champion",
+            "img1": "False Knight.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "FKnight_BMawlek": {
+            "name": "Defeat False Knight + Brooding Mawlek",
+            "img1": "False Knight.png",
+            "img2": "Brooding Mawlek.png",
+            "img3": null,
+            "obtain": false
+        },
+        "Flukemarm": {
+            "name": "Defeat Flukemarm",
+            "img1": "Flukemarm.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "HiveKnight": {
+            "name": "Defeat Hive Knight",
+            "img1": "Hive Knight.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Hornet2": {
+            "name": "Defeat Hornet 2",
+            "img1": "Hornet.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "MLords": {
+            "name": "Defeat Mantis Lords",
+            "img1": "Mantis Lords.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Nosk": {
+            "name": "Defeat Nosk",
+            "img1": "Nosk.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "PaleLurker": {
+            "name": "Defeat Pale Lurker",
+            "img1": "Pale Lurker.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Radiant": {
+            "name": "Defeat any one Radiant Boss",
+            "img1": "Godseeker.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "SoulMaster": {
+            "name": "Defeat Soul Master",
+            "img1": "Soul Master.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "SoulTyrant": {
+            "name": "Defeat Soul Tyrant",
+            "img1": "Soul Master.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "TLord": {
+            "name": "Defeat Traitor Lord",
+            "img1": "Traitor Lord.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "TMGrimm": {
+            "name": "Defeat Troupe Master Grimm",
+            "img1": "Troupemaster Grimm.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Uumuu": {
+            "name": "Defeat Uumuu",
+            "img1": "Uumuu.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "WK": {
+            "name": "Defeat Watcher Knights",
+            "img1": "Watcher Knights.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "VK_MMC": {
+            "name": "Defeat Vengefly King + Massive Moss Charger",
+            "img1": "Vengefly King.png",
+            "img2": "Massive Moss Charger.png",
+            "img3": null,
+            "obtain": false
+        },
+        "2DreamWarriors": {
+            "name": "Defeat two dream warriors",
+            "img1": "Gorb.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Galien": {
+            "name": "Defeat Galien",
+            "img1": "Galien.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Gorb": {
+            "name": "Defeat Gorb",
+            "img1": "Gorb.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Hu": {
+            "name": "Defeat Elder Hu",
+            "img1": "Elder Hu.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Marmu": {
+            "name": "Defeat Marmu",
+            "img1": "Marmu.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Markoth": {
+            "name": "Defeat Markoth",
+            "img1": "Markoth.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "NoEyes": {
+            "name": "Defeat No Eyes",
+            "img1": "No Eyes.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Xero": {
+            "name": "Defeat Xero",
+            "img1": "Xero.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "2Warriors": {
+            "name": "Kill two Soul Warriors",
+            "img1": "Elegant Key.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "3Sentries": {
+            "name": "Kill three different Great Husk Sentries",
+            "img1": "Great Husk Sentry.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Aluba": {
+            "name": "Kill an Aluba",
+            "img1": "Aluba.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Aluba2": {
+            "name": "Kill two different Alubas",
+            "img1": "Aluba.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Colo1": {
+            "name": "Colosseum 1",
+            "img1": "Colosseum.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "ColoZote": {
+            "name": "Defeat Colosseum Zote",
+            "img1": "Zote.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "CrystalCrawler": {
+            "name": "Kill a Crystal Crawler",
+            "img1": "Crystal Crawler.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Devout": {
+            "name": "Kill 6 different Stalking Devouts",
+            "img1": "Stalking Devout.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Durandoo": {
+            "name": "Kill a Durandoo",
+            "img1": "Durandoo.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "GHopper": {
+            "name": "Kill a Great Hopper",
+            "img1": "Great Hopper.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "GHusk": {
+            "name": "Kill Gorgeous Husk",
+            "img1": "Gorgeous Husk.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Gulka": {
+            "name": "Kill a Gulka with its own projectile",
+            "img1": "Gulka.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Kingsmould": {
+            "name": "Kill a Kingsmould",
+            "img1": "Kingsmould.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Lightseed": {
+            "name": "Kill a Lightseed",
+            "img1": "Lightseed.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Maggots": {
+            "name": "Kill two different Maggots",
+            "img1": "Maggot.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Marissa": {
+            "name": "Dream Nail Marissa",
+            "img1": "Dream Nail.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Millibelle": {
+            "name": "Slash Millibelle in Pleasure House",
+            "img1": "Millibelle.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Mimics": {
+            "name": "Check/Kill 4 Mimics",
+            "img1": "Mimic.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Myla": {
+            "name": "Kill Myla",
+            "img1": "Myla.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Herrah": {
+            "name": "Obtain Herrah",
+            "img1": "Herrah.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "Lurien": {
+            "name": "Obtain Lurien",
+            "img1": "Lurien.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "Monomon": {
+            "name": "Obtain Monomon",
+            "img1": "Monomon.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "DeepStag": {
+            "name": "Ride the Stag to Distant Village",
+            "img1": "Stag.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "GardenStag": {
+            "name": "Ride the Stag to Queen's Gardens",
+            "img1": "Stag.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "HiddenStag": {
+            "name": "Ride the Stag to Hidden Station",
+            "img1": "Stag.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "KingStag": {
+            "name": "Ride the Stag to King's Station",
+            "img1": "Stag.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "QueensStag": {
+            "name": "Ride the Stag to Queen's Station",
+            "img1": "Stag.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "5Charms": {
+            "name": "Have 5 or more Charms",
+            "img1": "Charm.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "5CharmsEquipped": {
+            "name": "Equip 5 Charms at the same time",
+            "img1": "Charm.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "CarefreeMelody": {
+            "name": "Obtain Carefree Melody",
+            "img1": "Carefree Melody.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "CompassSwarm": {
+            "name": "Obtain Wayward Compass or Gathering Swarm",
+            "img1": "Wayward Compass.png",
+            "img2": "Gathering Swarm.png",
+            "img3": null,
+            "obtain": false
+        },
+        "DWielderShield": {
+            "name": "Obtain Dream Wielder or Dreamshield",
+            "img1": "Dream Wielder.png",
+            "img2": "Dreamshield.png",
+            "img3": null,
+            "obtain": false
+        },
+        "FCharms": {
+            "name": "Obtain all three Fragile charms",
+            "img1": "Fragile Strength.png",
+            "img2": "Fragile Heart.png",
+            "img3": "Fragile Greed.png",
+            "obtain": false
+        },
+        "FlukenestFury": {
+            "name": "Obtain Flukenest or Fury of the Fallen",
+            "img1": "Flukenest.png",
+            "img2": "Fury of the Fallen.png",
+            "img3": null,
+            "obtain": false
+        },
+        "GrubsongElegy": {
+            "name": "Obtain Grubsong or Grubberfly's Elegy",
+            "img1": "Grubsong.png",
+            "img2": "Grubberfly's Elegy.png",
+            "img3": null,
+            "obtain": false
+        },
+        "GWombWeavers": {
+            "name": "Obtain Glowing Womb or Weaversong",
+            "img1": "Glowing Womb.png",
+            "img2": "Weaversong.png",
+            "img3": null,
+            "obtain": false
+        },
+        "HeavyBlowSteady": {
+            "name": "Obtain Heavy Blow or Steady Body",
+            "img1": "Heavy Blow.png",
+            "img2": "Steady Body.png",
+            "img3": null,
+            "obtain": false
+        },
+        "HivebloodShadow": {
+            "name": "Obtain Hiveblood or Sharp Shadow",
+            "img1": "Hiveblood.png",
+            "img2": "Sharp Shadow.png",
+            "img3": null,
+            "obtain": false
+        },
+        "LifebloodCharms": {
+            "name": "Obtain two Lifeblood charms",
+            "img1": "Lifeblood Core.png",
+            "img2": "Lifeblood Heart.png",
+            "img3": "Joni's Blessing.png",
+            "obtain": false
+        },
+        "Longnail": {
+            "name": "Obtain Longnail or Mark of Pride",
+            "img1": "Longnail.png",
+            "img2": "Mark of Pride.png",
+            "img3": null,
+            "obtain": false
+        },
+        "QSlashGlory": {
+            "name": "Obtain Quick Slash or Nailmaster's Glory",
+            "img1": "Quick Slash.png",
+            "img2": "Nailmaster's Glory.png",
+            "img3": null,
+            "obtain": false
+        },
+        "QuickDeepFocus": {
+            "name": "Obtain Quick Focus or Deep Focus",
+            "img1": "Quick Focus.png",
+            "img2": "Deep Focus.png",
+            "img3": null,
+            "obtain": false
+        },
+        "ShamanStoneTwister": {
+            "name": "Obtain Shaman Stone or Spell Twister",
+            "img1": "Shaman Stone.png",
+            "img2": "Spell Twister.png",
+            "img3": null,
+            "obtain": false
+        },
+        "SprintmasterDashmaster": {
+            "name": "Obtain Sprintmaster or Dashmaster",
+            "img1": "Sprintmaster.png",
+            "img2": "Dashmaster.png",
+            "img3": null,
+            "obtain": false
+        },
+        "SoulTools": {
+            "name": "Obtain Soul Eater or Soul Catcher",
+            "img1": "Soul Eater.png",
+            "img2": "Soul Catcher.png",
+            "img3": null,
+            "obtain": false
+        },
+        "ThornsStalwart": {
+            "name": "Obtain Thorns of Agony or Stalwart Shell",
+            "img1": "Thorns of Agony.png",
+            "img2": "Stalwart Shell.png",
+            "img3": null,
+            "obtain": false
+        },
+        "UnnShell": {
+            "name": "Obtain Shape of Unn or Baldur Shell",
+            "img1": "Shape of Unn.png",
+            "img2": "Baldur Shell.png",
+            "img3": null,
+            "obtain": false
+        },
+        "LoveKey": {
+            "name": "Obtain the Love Key",
+            "img1": "Love Key.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "DDark": {
+            "name": "Obtain Descending Dark",
+            "img1": "Descending Dark.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "DNail": {
+            "name": "Obtain Dream Nail",
+            "img1": "Dream Nail.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "DGate": {
+            "name": "Obtain Dream Gate",
+            "img1": "Dream Gate.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "NailArts": {
+            "name": "Obtain 2 Nail Arts",
+            "img1": "Great Slash.png",
+            "img2": "Cyclone Slash.png",
+            "img3": "Dash Slash.png",
+            "obtain": true
+        },
+        "Shriek": {
+            "name": "Obtain Abyss Shriek",
+            "img1": "Abyss Shriek.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "SSoul": {
+            "name": "Obtain Shade Soul",
+            "img1": "Shade Soul.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "Tear": {
+            "name": "Obtain Isma's Tear",
+            "img1": "Isma's Tear.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "VSpirit": {
+            "name": "Obtain Vengeful Spirit",
+            "img1": "Vengeful Spirit.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "Wraiths": {
+            "name": "Obtain Howling Wraiths",
+            "img1": "Howling Wraiths.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "15Grub": {
+            "name": "Obtain 15 grubs",
+            "img1": "Grub.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "2Ore": {
+            "name": "Obtain 2 Pale Ore",
+            "img1": "Pale Ore.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "2Keys": {
+            "name": "Use 2 Simple Keys",
+            "img1": "Simple Key.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "3Maps": {
+            "name": "Have 3 different maps not counting Dirtmouth or Hive",
+            "img1": "Map.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "CollectorMap": {
+            "name": "Obtain Collector's Map",
+            "img1": "Collector's Map.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "Egg": {
+            "name": "Obtain 1 Arcane Egg",
+            "img1": "Arcane Egg.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "Godtuner": {
+            "name": "Obtain Godtuner",
+            "img1": "Godtuner.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "Idols": {
+            "name": "Obtain 3 King's Idols",
+            "img1": "King's Idol.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "Journals": {
+            "name": "Obtain 5 Wanderer's Journals",
+            "img1": "Wanderer's Journal.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "Lantern": {
+            "name": "Obtain Lumafly Lantern",
+            "img1": "Lumafly Lantern.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "Mask1": {
+            "name": "Obtain 1 extra mask",
+            "img1": "Mask Shard.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "Notches": {
+            "name": "Have 6 Charm Notches total",
+            "img1": "Charm Notch.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "RancidEggs": {
+            "name": "Obtain 4 Rancid Eggs",
+            "img1": "Rancid Egg.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "Seals": {
+            "name": "Obtain 5 Hallownest Seals",
+            "img1": "Hallownest Seal.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "SoulVessel": {
+            "name": "Obtain 1 extra soul vessel",
+            "img1": "Vessel Fragment.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "TramPass": {
+            "name": "Obtain Tram Pass",
+            "img1": "Tram Pass.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "WorldSense": {
+            "name": "Obtain World Sense",
+            "img1": "World Sense.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "Cornifer3": {
+            "name": "Interact with 3 Cornifer locations",
+            "img1": "Map.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "CHeartCheck": {
+            "name": "Check Crystal Heart",
+            "img1": "Crystal Heart.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "CPeaksChest": {
+            "name": "Open the Crystal Peaks chest",
+            "img1": "Chest.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "DeepFocusCheck": {
+            "name": "Check Deep Focus",
+            "img1": "Deep Focus.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Dreamers": {
+            "name": "Get 2 Dreamer's checks (Requires Dream nail)",
+            "img1": "Dream Nail.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "GreenpathRoot": {
+            "name": "Complete the Greenpath Root",
+            "img1": "Whispering Root.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "HallownestCrown": {
+            "name": "Check the Hallownest Crown",
+            "img1": "Pale Ore.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Fountain": {
+            "name": "Buy the Basin fountain check",
+            "img1": "Geo.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "FungalCoreElder": {
+            "name": "Bow to the Fungal Core Elder",
+            "img1": null,
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "GWombSkip": {
+            "name": "Check Glowing Womb",
+            "img1": "Glowing Womb.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "HiveMask": {
+            "name": "Check the Hive Mask Shard",
+            "img1": "Mask Shard.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "JoniDarkRoom": {
+            "name": "Check Joni's Blessing",
+            "img1": "Joni's Blessing.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "KEdgeRoot": {
+            "name": "Complete the Kingdom's Edge Root",
+            "img1": "Whispering Root.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "LoveKeySkip": {
+            "name": "Check Love Key",
+            "img1": "Love Key.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Nailmasters": {
+            "name": "Check 2 Nailmasters",
+            "img1": "Oro and Mato.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "PaleOreCheck": {
+            "name": "Get two Pale Ore checks (Grubs / Essence excluded)",
+            "img1": "Grub.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "SanctuarySkip": {
+            "name": "Check the journal below Stone Sanctuary",
+            "img1": "Wanderer's Journal.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Sheo": {
+            "name": "Check Sheo",
+            "img1": "Sheo.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Shops": {
+            "name": "Visit all 4 shops (Sly, Iselda, Salubra and Leg Eater)",
+            "img1": "Salubra.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "SpellLocations": {
+            "name": "Check three different spell locations",
+            "img1": "Vengeful Spirit.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "StagVessel": {
+            "name": "Check the Stag Nest vessel fragment",
+            "img1": "Vessel Fragment.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "SSoulCheck": {
+            "name": "Check Shade Soul",
+            "img1": "Shade Soul.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "ShriekCheck": {
+            "name": "Get the Abyss Shriek check",
+            "img1": "Abyss Shriek.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "TearCheck": {
+            "name": "Check Isma's Tear",
+            "img1": "Isma's Tear.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Trees4": {
+            "name": "Complete 4 full dream trees",
+            "img1": "Whispering Root.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "UnnSkip": {
+            "name": "Check Shape of Unn",
+            "img1": "Shape of Unn.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "VillageJournal": {
+            "name": "Check the journal above Mantis Village",
+            "img1": "Wanderer's Journal.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "VoidHeart": {
+            "name": "Check Void Heart",
+            "img1": "Void Heart.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "BasinGrubs": {
+            "name": "Check/Free all grubs in Ancient Basin (2)",
+            "img1": "Grub.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "CoTGrubs": {
+            "name": "Check/Free all grubs in City of Tears (5)",
+            "img1": "Grub.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "CrossroadsCanyonGrubs": {
+            "name": "Check/Free all grubs in Crossroads (5) + Fog Canyon (1)",
+            "img1": "Grub.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "DeepnestGrubs": {
+            "name": "Check/Free all grubs in Deepnest (5)",
+            "img1": "Grub.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "FunGreenGrub": {
+            "name": "Check/Free all grubs in Greenpath (4) and in Fungal (2)",
+            "img1": "Grub.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "PeaksGrub": {
+            "name": "Check/Free all grubs in Crystal Peaks (7)",
+            "img1": "Grub.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "QueenGrub": {
+            "name": "Check/Free all grubs in Queen's Gardens (3)",
+            "img1": "Grub.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "WaterGrub": {
+            "name": "Check/Free all grubs in Waterways (3)",
+            "img1": "Grub.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "3Floors": {
+            "name": "Break 3 floors using Dive",
+            "img1": "Desolate Dive.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "420Rock": {
+            "name": "Break the 420 geo rock in Kingdom's Edge",
+            "img1": "Geo.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "500Essence": {
+            "name": "Collect 500 essence",
+            "img1": "Essence.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "Bank": {
+            "name": "Have 1500 geo in the bank",
+            "img1": "Geo.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Bardoon": {
+            "name": "Talk to Bardoon",
+            "img1": null,
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "BrettaSly": {
+            "name": "Rescue Bretta + Sly",
+            "img1": "Bretta.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Brumm": {
+            "name": "Get Brumm's flame",
+            "img1": "Flame.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Cloth": {
+            "name": "Talk to Cloth",
+            "img1": "Cloth.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "ClothQuest": {
+            "name": "Complete either ending of the Cloth questline",
+            "img1": "Cloth.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "CotQuirrel": {
+            "name": "Sit on the City of Tears Quirrel bench",
+            "img1": "Bench.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "CrestElevator": {
+            "name": "Use City Crest + Ride both CoT large elevators",
+            "img1": "City Crest.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "DamnItGrimmchild": {
+            "name": "Kill 3 Oomas using a minion charm",
+            "img1": "Weaversong.png",
+            "img2": "Glowing Womb.png",
+            "img3": "Grimmchild.png",
+            "obtain": false
+        },
+        "DeepnestZote": {
+            "name": "Rescue Zote in Deepnest",
+            "img1": "Zote.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "DefenderSign": {
+            "name": "Check/Read the Dung Defender sign before Isma's Grove",
+            "img1": "Lore.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "DirtmouthElevator": {
+            "name": "Open the Dirtmouth / Crystal Peaks elevator",
+            "img1": "Lever.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "ElderFlower": {
+            "name": "Give Flower to Elderbug",
+            "img1": "Delicate Flower.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Emilitia": {
+            "name": "Talk to Emilitia (shortcut out of sewers)",
+            "img1": null,
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "FlukeHermit": {
+            "name": "Talk to the Fluke Hermit",
+            "img1": null,
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Godhome": {
+            "name": "Enter Godhome",
+            "img1": "Godseeker.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "GoamGarpede": {
+            "name": "Check the Goam and Garpede Journal Entries",
+            "img1": "Garpede.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Jiji": {
+            "name": "Open Jiji's Hut and buy out Jiji",
+            "img1": "Jiji.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "HopperHell": {
+            "name": "Hit the Oro scarecrow up until the hoppers spawn",
+            "img1": "Oro and Mato.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Lemm": {
+            "name": "Talk to Lemm in his shop with Defender's Crest equipped",
+            "img1": "Defender's Crest.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "LegEater": {
+            "name": "Buy out Leg Eater",
+            "img1": "Leg Eater.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Lifeblood": {
+            "name": "10 Lifeblood masks at the same time",
+            "img1": "Lifeblood.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "LifebloodRoom": {
+            "name": "Enter the Lifeblood Core room without wearing any Lifeblood charms",
+            "img1": "Lifeblood.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "LoreArchives": {
+            "name": "Check/Read 3 lore tablets in Teacher's Archives",
+            "img1": "Lore.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "LoreBasin": {
+            "name": "Check/Read the lore tablet in Ancient Basin",
+            "img1": "Lore.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "LoreCity": {
+            "name": "Check/Read two lore tablets in City of Tears proper (No sub areas)",
+            "img1": "Lore.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "LoreCliffs": {
+            "name": "Check/Read the lore tablet in Howling Cliffs",
+            "img1": "Lore.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "LoreGreenpath": {
+            "name": "Check/Read three lore tablets in Greenpath",
+            "img1": "Lore.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "LoreKEdge": {
+            "name": "Check/Read the lore tablet in Kingdom's Edge (requires Spore Shroom)",
+            "img1": "Spore Shroom.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "LorePilgrims": {
+            "name": "Check/Read both Pilgrim's Way lore tablets",
+            "img1": "Lore.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "LoreSanctum": {
+            "name": "Check/Read both lore tablets in Soul Sanctum",
+            "img1": "Lore.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "LoreVillage": {
+            "name": "Check/Read both lore tablets in Mantis Village",
+            "img1": "Lore.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Lumafly": {
+            "name": "Check the Charged Lumafly Journal Entry",
+            "img1": "Charged Lumafly.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "MaskMaker": {
+            "name": "Talk to Mask Maker",
+            "img1": null,
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Midwife": {
+            "name": "Talk to Midwife",
+            "img1": null,
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "MossProphet": {
+            "name": "Bow to Moss Prophet, dead or alive",
+            "img1": null,
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "MrMushroom1": {
+            "name": "Interact with Mr. Mushroom once (Does not require Spore Shroom)",
+            "img1": "Dreamer Masks.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Nail2": {
+            "name": "Nail 2",
+            "img1": "Pale Ore.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "Nail3": {
+            "name": "Nail 3",
+            "img1": "Pale Ore.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "NailHut": {
+            "name": "Use a Nail Art in its vanilla Nailmaster's Hut",
+            "img1": "Great Slash.png",
+            "img2": "Cyclone Slash.png",
+            "img3": "Dash Slash.png",
+            "obtain": true
+        },
+        "Overcharm": {
+            "name": "Talk to Salubra while overcharmed",
+            "img1": "Salubra.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Pins": {
+            "name": "Buy 6 map pins from Iselda (All but two)",
+            "img1": "Dream Nail.png",
+            "img2": "Tram Pass.png",
+            "img3": null,
+            "obtain": true
+        },
+        "PinsAll": {
+            "name": "Buy 8 map pins from Iselda (All)",
+            "img1": "Dream Nail.png",
+            "img2": "Tram Pass.png",
+            "img3": null,
+            "obtain": true
+        },
+        "Revek": {
+            "name": "Parry Revek 3 times without dying (Spirit's Glade Guard)",
+            "img1": "Dream Nail.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "Salubra": {
+            "name": "Buy out Salubra",
+            "img1": "Charm.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "ShadeGates": {
+            "name": "Slash two Shade Gates",
+            "img1": "Nail.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Springs": {
+            "name": "Take a bath in 4 different Hot Springs",
+            "img1": "Hot Spring.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "SpringSplash": {
+            "name": "Splash the NPC in the Colosseum's hot spring",
+            "img1": "Hot Spring.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "ShrineOfBelievers": {
+            "name": "Visit Shrine of Believers",
+            "img1": "Dream Nail.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "Telescope": {
+            "name": "Look through Lurien's telescope",
+            "img1": "Watcher Knights.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Tendrils": {
+            "name": "Check the Void Tendrils Journal Entry",
+            "img1": "Void Tendrils.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Tiso": {
+            "name": "Swat Tiso's shield away from his corpse",
+            "img1": null,
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Trilobite": {
+            "name": "Slash the Beast's Den Trilobite",
+            "img1": "Stalking Devout.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Tuk": {
+            "name": "Talk to Tuk",
+            "img1": null,
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "VisitDistantHive": {
+            "name": "Visit Distant Village or Hive",
+            "img1": null,
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "VisitLakes": {
+            "name": "Visit Lake of Unn or Blue Lake",
+            "img1": null,
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "VisitMounds": {
+            "name": "Visit Overgrown Mound or Crystalised Mound (Crystalised requires dive)",
+            "img1": null,
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "VisitQueensShell": {
+            "name": "Visit Queen's Gardens or Cast Off Shell",
+            "img1": null,
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "VisitSanctumWaterways": {
+            "name": "Visit Soul Sanctum or Royal Waterways",
+            "img1": null,
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "VisitTower": {
+            "name": "Visit Tower of Love (Love Key not required)",
+            "img1": null,
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "VoidPool": {
+            "name": "Swim in a Void Pool",
+            "img1": "Swim.png",
+            "img2": null,
+            "img3": null,
+            "obtain": true
+        },
+        "WhiteLady": {
+            "name": "Dream Nail White Lady",
+            "img1": "Shade Cloak.png",
+            "img2": "Dream Nail.png",
+            "img3": null,
+            "obtain": true
+        },
+        "Willow": {
+            "name": "Dream Nail Willoh's meal",
+            "img1": "Dream Nail.png",
+            "img2": "Monarch Wings.png",
+            "img3": null,
+            "obtain": true
+        },
+        "WPShadeSkip": {
+            "name": "Sit down in Hidden Station",
+            "img1": "Bench.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Grubfather": {
+            "name": "Get all the Grubfather checks",
+            "img1": "Grub.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        },
+        "Seer": {
+            "name": "Get all the Seer checks",
+            "img1": "Essence.png",
+            "img2": null,
+            "img3": null,
+            "obtain": false
+        }
+    }
+}

@@ -131,10 +131,9 @@ function exit() {
     window.location.href = "index.html";
 }
 
-function setTitle(title) {
-    document.title = title;
-    document.getElementsByTagName("h2")[0].innerText = title;
-}
+// function setTitle(title) {
+//     document.title = title;
+// }
 
 function create_with_class(type, cls) {
     let element = document.createElement(type)
@@ -146,62 +145,62 @@ function create_svg(type) {
     return document.createElementNS("http://www.w3.org/2000/svg", type);
 }
 
-function createBoard(boardMin) {
-    let height = boardMin.height;
-    let width = boardMin.width;
-    let table = document.getElementById("board");
-    table.replaceChildren([]);
-    cellStates = {};
-    let headerRow = create_with_class("thead", "bingo-col-header-row");
-    let corner = create_with_class("th", "bingo-col-header");
-    headerRow.appendChild(corner);
-    for (let x = 1; x <= width; x++) {
-        let header = create_with_class("th", "bingo-col-header");
-        let headerContainer = create_with_class("div", "header-container");
-        header.id = "header" + x;
-        headerStates[x] = new CellState();
-        let textDiv = create_with_class("div", "header-content");
-        textDiv.innerText = x;
-        headerContainer.appendChild(textDiv);
-        let svgDiv = create_with_class("div", "svg-container");
-        let svg = create_svg("svg");
-        svg.id = "header-bg" + x;
-        svg.setAttribute("viewBox", "0 0 100 100");
-        svg.setAttribute("preserveAspectRatio", "none");
-        svgDiv.appendChild(svg);
-        headerContainer.appendChild(svgDiv);
-        header.appendChild(headerContainer);
-        headerRow.appendChild(header);
-    }
-    table.appendChild(headerRow);
-    for (let y = 1; y <= height; y++) {
-        let row = create_with_class("tr", "")
-        let rowHeader = create_with_class("th", "bingo-row-header");
-        rowHeader.innerText = y;
-        row.appendChild(rowHeader);
-        for (let x = 1; x <= width; x++) {
-            let index = (y - 1) * width + x - 1
-            cellStates[index] = new CellState();
-            let cell = create_with_class("td", "bingo-cell");
-            cell.id = "cell" + index;
-            cell.addEventListener("mouseover", onCellHoverChanged(index));
-            cell.addEventListener("mouseleave", onCellHoverChanged(index));
-            let svgDiv = create_with_class("div", "svg-container");
-            let svg = create_svg("svg");
-            svg.id = "cell-bg" + index;
-            svg.setAttribute("viewBox", "0 0 100 100");
-            svg.setAttribute("preserveAspectRatio", "none");
-            svgDiv.appendChild(svg);
-            cell.appendChild(svgDiv);
-            let textDiv = create_with_class("div", "bingo-cell-content");
-            textDiv.id = "cell-text" + index
-            cell.appendChild(textDiv);
-            cell.appendChild(create_with_class("div", "bingo-shadow"))
-            row.appendChild(cell);
-        }
-        table.appendChild(row);
-    }
-}
+// function createBoard(boardMin) {
+//     let height = boardMin.height;
+//     let width = boardMin.width;
+//     let table = document.getElementById("board");
+//     table.replaceChildren([]);
+//     cellStates = {};
+//     let headerRow = create_with_class("thead", "bingo-col-header-row");
+//     let corner = create_with_class("th", "bingo-col-header");
+//     headerRow.appendChild(corner);
+//     for (let x = 1; x <= width; x++) {
+//         let header = create_with_class("th", "bingo-col-header");
+//         let headerContainer = create_with_class("div", "header-container");
+//         header.id = "header" + x;
+//         headerStates[x] = new CellState();
+//         let textDiv = create_with_class("div", "header-content");
+//         textDiv.innerText = x;
+//         headerContainer.appendChild(textDiv);
+//         let svgDiv = create_with_class("div", "svg-container");
+//         let svg = create_svg("svg");
+//         svg.id = "header-bg" + x;
+//         svg.setAttribute("viewBox", "0 0 100 100");
+//         svg.setAttribute("preserveAspectRatio", "none");
+//         svgDiv.appendChild(svg);
+//         headerContainer.appendChild(svgDiv);
+//         header.appendChild(headerContainer);
+//         headerRow.appendChild(header);
+//     }
+//     table.appendChild(headerRow);
+//     for (let y = 1; y <= height; y++) {
+//         let row = create_with_class("tr", "")
+//         let rowHeader = create_with_class("th", "bingo-row-header");
+//         rowHeader.innerText = y;
+//         row.appendChild(rowHeader);
+//         for (let x = 1; x <= width; x++) {
+//             let index = (y - 1) * width + x - 1
+//             cellStates[index] = new CellState();
+//             let cell = create_with_class("td", "bingo-cell");
+//             cell.id = "cell" + index;
+//             cell.addEventListener("mouseover", onCellHoverChanged(index));
+//             cell.addEventListener("mouseleave", onCellHoverChanged(index));
+//             let svgDiv = create_with_class("div", "svg-container");
+//             let svg = create_svg("svg");
+//             svg.id = "cell-bg" + index;
+//             svg.setAttribute("viewBox", "0 0 100 100");
+//             svg.setAttribute("preserveAspectRatio", "none");
+//             svgDiv.appendChild(svg);
+//             cell.appendChild(svgDiv);
+//             let textDiv = create_with_class("div", "bingo-cell-content");
+//             textDiv.id = "cell-text" + index
+//             cell.appendChild(textDiv);
+//             cell.appendChild(create_with_class("div", "bingo-shadow"))
+//             row.appendChild(cell);
+//         }
+//         table.appendChild(row);
+//     }
+// }
 
 function pointPrinter(width, height) {
     function scaler(point) {
@@ -614,25 +613,18 @@ function copyResults() {
 }
 
 function hk7yListener(event){
-    let currDiv = document.getElementById("hk7ychild")
-    let goalList = []
-
-    for (var availGoal in event.board.goals){
-        goalName = event.board.goals[availGoal].name;
-        goalList.push(goalName)
+    
+    for (let i = 1; i < 4; i++){
+        let mySelectName = "goals" + i;
+        let mySelect = document.getElementById(mySelectName);
+        for (var availGoal in event.board.goals){
+            goalName = event.board.goals[availGoal].name;
+            myOpt = document.createElement("option")
+            myOpt.value = availGoal
+            myOpt.text = goalName
+            mySelect.appendChild(myOpt)
+        }
     }
-    currDiv.textContent = goalList
-}
-
-function createHK7Ybtn(roomId){
-    let link = document.createElement("a");
-    link.setAttribute("href", "hk7y.html?id=" + roomId);
-    let button = document.createElement("button");
-    button.textContent = "HK7Y Overlay";
-    link.appendChild(button);
-    let currentDiv = document.getElementById("hk7ychild");
-    let parentDiv = currentDiv.parentNode;
-    parentDiv.insertBefore(link, currentDiv);
 }
 
 websocket.addEventListener("open", getBoard);
@@ -648,58 +640,46 @@ window.addEventListener("JOINED", (data) => {
     Cookies.set(roomId, event.userId, {sameSite: "strict"});
     document.getElementById("room").hidden = false;
     document.getElementById("login-main").hidden = true;
-    setTitle(event.roomName);
-    createBoard(event.boardMin);
-    fillBoard(event.boardMin, event.teamColours);
-    createHK7Ybtn(roomId);
+    //setTitle(event.roomName);
+    //createBoard(event.boardMin);
+    //fillBoard(event.boardMin, event.teamColours);
 });
 
 window.addEventListener("REJOINED", (data) => {
     const event = data.detail;
     updateCurrentTeamId(event.teamId);
-    setTitle(event.roomName);
-    createBoard(event.boardMin);
-    fillBoard(event.boardMin, event.teamColours);
-    createHK7Ybtn(roomId);
+    //setTitle(event.roomName);
+    //createBoard(event.boardMin);
+    //fillBoard(event.boardMin, event.teamColours);
 });
 
 window.addEventListener("MEMBERS", (data) => {
     const event = data.detail;
-    const teamSelectorInner = document.getElementById("teamSelector-inner");
-    teamSelectorInner.textContent = "";
-    for (const teamId in event.teams) {
-        teamView = event.teams[teamId];
-        let teamWrapper = create_with_class("div", "team-wrapper");
-        teamWrapper.setAttribute("teamId", teamId);
-        teamWrapper.setAttribute("ondblclick", "joinTeam(this)");
-        let teamBox = create_with_class("div", "team-box bordered");
-        teamBox.setAttribute("style", "background-color: " + teamView.colour + ";");
-        teamBox.innerText = teamView.name;
-        teamWrapper.appendChild(teamBox);
-        for (const member of teamView.members) {
-            let memberPara = create_with_class("p", "team-member");
-            memberPara.innerText = member.name;
-            if (!member.connected) {
-                memberPara.classList.add("disconnected");
-            }
-            teamWrapper.appendChild(memberPara);
+    for (let i=1; i<4; i++){
+        let selectId = "player" + i
+        console.log(selectId)
+        let mySelect = document.getElementById(selectId);
+        for (const teamId in event.teams) {
+            let myOpt = document.createElement("option")
+            myOpt.value = event.teams[teamId].id
+            myOpt.text = event.teams[teamId].name
+            mySelect.appendChild(myOpt)
         }
-        teamSelectorInner.appendChild(teamWrapper);
     }
 });
 
 window.addEventListener("TEAM_JOINED", (data) => {
     const event = data.detail;
     updateCurrentTeamId(event.teamId);
-    createBoard(event.board);
-    fillBoard(event.board, event.teamColours);
+    //createBoard(event.board);
+    //fillBoard(event.board, event.teamColours);
 });
 
 window.addEventListener("TEAM_CREATED", (data) => {
     const event = data.detail;
     updateCurrentTeamId(event.teamId);
-    createBoard(event.board);
-    fillBoard(event.board, event.teamColours);
+    //createBoard(event.board);
+    //fillBoard(event.board, event.teamColours);
 });
 
 window.addEventListener("TEAM_LEFT", (data) => {
@@ -711,7 +691,7 @@ var currentUpdate = null;
 window.addEventListener("UPDATE", (data) => {
     const event = data.detail;
     currentUpdate = event;
-    fillBoard(event.board, event.teamColours);
+    //fillBoard(event.board, event.teamColours);
     hk7yListener(event);
 });
 
@@ -720,15 +700,15 @@ window.addEventListener("NOAUTH", (data) => {
     Cookies.remove(roomId);
 });
 
-window.addEventListener("DOMContentLoaded", () => {
-    let wsUrl = Cookies.get("wsUrl");
-    if (wsUrl != null) {
-        document.getElementById("websocket-url").value = wsUrl;
-    }
-    document.getElementById("websocket-url").addEventListener("change", (event) => {
-        console.log("Websocket chaning to " + event.target.value);
-        websocket = new ReconnectingWebSocket(event.target.value);
-        subscribeWebsocket();
-        Cookies.set("wsUrl", event.target.value, {sameSite: "strict"});
-    });
-});
+// window.addEventListener("DOMContentLoaded", () => {
+//     let wsUrl = Cookies.get("wsUrl");
+//     if (wsUrl != null) {
+//         document.getElementById("websocket-url").value = wsUrl;
+//     }
+//     document.getElementById("websocket-url").addEventListener("change", (event) => {
+//         console.log("Websocket chaning to " + event.target.value);
+//         websocket = new ReconnectingWebSocket(event.target.value);
+//         subscribeWebsocket();
+//         Cookies.set("wsUrl", event.target.value, {sameSite: "strict"});
+//     });
+// });
